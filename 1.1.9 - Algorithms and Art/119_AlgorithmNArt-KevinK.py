@@ -113,16 +113,69 @@ def mouth_regular():
     painter.end_fill()
     painter.penup()
 
+    painter.fillcolor('white')
+
     painter.goto(-35,45)
     painter.setheading(270)
     painter.pendown()
+    painter.begin_fill()
     painter.circle(35,180)
     painter.left(90)
     painter.forward(70)
+    painter.end_fill()
+    painter.penup()
 
 def mouth_mustache():
-    painter.forward(100)
-    print('mustache drawn')
+    painter.pencolor('black')
+    painter.fillcolor('red')
+    
+    painter.goto(0,50)
+    painter.pendown()
+    painter.begin_fill()
+    painter.pendown()
+    painter.circle(20)
+    painter.end_fill()
+    painter.penup()
+
+    painter.fillcolor('white')
+
+    painter.goto(-35,40)
+    painter.setheading(270)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(35,180)
+    painter.left(90)
+    painter.forward(70)
+    painter.end_fill()
+    painter.penup()
+
+    painter.fillcolor('black')
+
+    painter.goto(0,50)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(10)
+    painter.end_fill()
+
+    painter.goto(10,54)
+    painter.begin_fill()
+    painter.circle(10)
+    painter.end_fill()
+
+    painter.goto(20,50)
+    painter.begin_fill()
+    painter.circle(10)
+    painter.end_fill()
+
+    painter.goto(-10,54)
+    painter.begin_fill()
+    painter.circle(10)
+    painter.end_fill()
+
+    painter.goto(-20,50)
+    painter.begin_fill()
+    painter.circle(10)
+    painter.end_fill()
 #-------------------------- Hat definitions
 def hat_first():
     painter.circle(50,360,4)
@@ -137,7 +190,7 @@ potatohead_list = []
  # Draw potato body
 painter.pensize(2)
 painter.pencolor('black')
-painter.fillcolor('brown')
+painter.fillcolor('tan')
 
 painter.begin_fill()
 painter.circle(80)
@@ -170,7 +223,6 @@ while active == 'y':
     elif hat % 3 == 1:
         active = 'n'
         potatohead_list.append(hat_second)
-    
     elif hat != int:
         exit()
         
