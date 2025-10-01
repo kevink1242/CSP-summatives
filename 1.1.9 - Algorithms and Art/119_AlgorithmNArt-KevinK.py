@@ -1,6 +1,6 @@
 import turtle as trtl
 painter = trtl.Turtle()
-painter.speed(0)
+#painter.speed(0)
 
 
 
@@ -176,10 +176,13 @@ def mouth_mustache():
     painter.begin_fill()
     painter.circle(10)
     painter.end_fill()
+    painter.penup()
 #-------------------------- Hat definitions
 def hat_first():
-    painter.circle(50,360,4)
-    print('first hat drawn')
+    painter.goto(0,70)
+    painter.pendown()
+    painter.circle(90,180,3)
+    print('drawing first hat')
 
 def hat_second():
     painter.circle(20,180)
@@ -187,18 +190,20 @@ def hat_second():
 
 potatohead_list = []
 
- # Draw potato body
-painter.pensize(2)
-painter.pencolor('black')
-painter.fillcolor('tan')
 
-painter.begin_fill()
-painter.circle(80)
-painter.end_fill()
-painter.penup()
 
 active = 'y'
 while active == 'y':
+    painter.goto(0,0)
+     # Draw potato body
+    painter.pensize(2)
+    painter.pencolor('black')
+    painter.fillcolor('tan')
+
+    painter.begin_fill()
+    painter.circle(80)
+    painter.end_fill()
+    painter.penup()
 #------------------------------------ User inputs
     eyes = trtl.textinput('Create Mr. Potato Head', 'y/n for glasses')
     if eyes == 'y':
@@ -219,15 +224,18 @@ while active == 'y':
     hat = int(trtl.textinput('Create Mr. Potato Head', 'type an odd or even number for a hat'))
     if hat % 2 == 0:
         potatohead_list.append(hat_first)
-    elif hat % 2 > 1:
+    elif hat % 2 > 0:
         potatohead_list.append(hat_second)
     elif hat != int:
         exit()
         
-# Drawing the features        
+# Drawing the features     
     for i in potatohead_list:
         i()
         potatohead_list.pop()
+
+    active = trtl.textinput('Repeat', 'y/n to restart?')
+    trtl.clearscreen()
 #----------------------------------------
 
 
