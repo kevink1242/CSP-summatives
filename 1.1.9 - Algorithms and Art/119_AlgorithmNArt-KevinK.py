@@ -216,12 +216,10 @@ while active == 'y':
     elif mouth != 'y' or 'n':
         exit()
     
-    hat = int(trtl.textinput('Create Mr. Potato Head', 'type a number 1-3 for a hat'))
-    if hat % 3 == 0:
-        active = 'n'
+    hat = int(trtl.textinput('Create Mr. Potato Head', 'type an odd or even number for a hat'))
+    if hat % 2 == 0:
         potatohead_list.append(hat_first)
-    elif hat % 3 == 1:
-        active = 'n'
+    elif hat % 2 > 1:
         potatohead_list.append(hat_second)
     elif hat != int:
         exit()
@@ -230,6 +228,7 @@ while active == 'y':
     for i in potatohead_list:
         i()
         potatohead_list.pop()
+#----------------------------------------
 
 
 print(potatohead_list)
