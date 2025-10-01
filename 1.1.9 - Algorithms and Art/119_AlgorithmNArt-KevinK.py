@@ -113,7 +113,12 @@ def mouth_regular():
     painter.end_fill()
     painter.penup()
 
-    painter.goto()
+    painter.goto(-35,45)
+    painter.setheading(270)
+    painter.pendown()
+    painter.circle(35,180)
+    painter.left(90)
+    painter.forward(70)
 
 def mouth_mustache():
     painter.forward(100)
