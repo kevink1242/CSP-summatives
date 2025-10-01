@@ -113,6 +113,8 @@ def mouth_regular():
     painter.end_fill()
     painter.penup()
 
+    painter.goto()
+
 def mouth_mustache():
     painter.forward(100)
     print('mustache drawn')
@@ -143,41 +145,37 @@ while active == 'y':
     eyes = trtl.textinput('Create Mr. Potato Head', 'y/n for glasses')
     if eyes == 'y':
         potatohead_list.append(eyes_glasses)
-        print('added glasses')
     elif eyes == 'n':
         potatohead_list.append(eyes_regular)
-        print('regular eyes')
     elif eyes != 'y' or 'n':
         exit()
     
     mouth = trtl.textinput('Create Mr. Potato Head', 'y/n for a mustache')
     if mouth == 'y':
         potatohead_list.append(mouth_mustache)
-        print('added mustache')
     elif mouth == 'n':
         potatohead_list.append(mouth_regular)
-        print('regular mouth')
     elif mouth != 'y' or 'n':
         exit()
     
-    hat = int(trtl.textinput('Create Mr. Potato Head', 'type an odd or even number for a hat'))
-    if hat % 2 == 0:
+    hat = int(trtl.textinput('Create Mr. Potato Head', 'type a number 1-3 for a hat'))
+    if hat % 3 == 0:
         active = 'n'
         potatohead_list.append(hat_first)
-        print('added first hat')
-    elif hat % 2 == 1:
+    elif hat % 3 == 1:
         active = 'n'
         potatohead_list.append(hat_second)
-        print('added second hat')
+    
     elif hat != int:
         exit()
         
 # Drawing the features        
     for i in potatohead_list:
         i()
+        potatohead_list.pop()
 
 
-
+print(potatohead_list)
 
 
 
