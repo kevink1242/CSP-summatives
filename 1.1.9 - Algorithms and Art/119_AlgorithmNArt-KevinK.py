@@ -229,6 +229,7 @@ potatohead_list = []
 active = 'y'
 while active == 'y':
     painter.goto(0,0)
+    painter.setheading(0)
      # Draw potato body
     painter.pensize(2)
     painter.pencolor('black')
@@ -267,17 +268,10 @@ while active == 'y':
     for i in potatohead_list:
         i()
 
-    for p in range(2):
-        potatohead_list.pop()    
-
     active = trtl.textinput('Repeat', 'y/n to restart?')
     trtl.clearscreen()
-    eyes = ''
-    mouth = ''
-    hat = ''
+    potatohead_list = []
 #----------------------------------------
-
-
 
 
 
