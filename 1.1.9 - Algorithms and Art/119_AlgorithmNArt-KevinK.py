@@ -225,19 +225,7 @@ def hat_second():
 
 potatohead_list = []
 
- # Draw potato body
-painter.pensize(2)
-painter.pencolor('black')
-painter.fillcolor('tan')
 
-painter.begin_fill()
-painter.circle(80)
-painter.end_fill()
-painter.penup()
-
-
-hat_second()
-'''
 active = 'y'
 while active == 'y':
     painter.goto(0,0)
@@ -288,7 +276,7 @@ while active == 'y':
     mouth = ''
     hat = ''
 #----------------------------------------
-'''
+
 
 
 
