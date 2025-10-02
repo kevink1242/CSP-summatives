@@ -1,6 +1,6 @@
 import turtle as trtl
 painter = trtl.Turtle()
-painter.speed(0)
+painter.speed(0.3)
 painter.shapesize(6)
 
 
@@ -266,6 +266,20 @@ while active == 'y':
     painter.pensize(10)
     painter.fillcolor('blue')
     painter.pencolor('blue')
+    
+    painter.goto(-5,-30)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(25)
+    painter.end_fill()
+    painter.penup()
+    painter.goto(50,-30)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(25)
+    painter.end_fill()
+    painter.penup()
+
 
 
 
