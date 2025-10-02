@@ -1,6 +1,6 @@
 import turtle as trtl
 painter = trtl.Turtle()
-#painter.speed(0)
+painter.speed(0)
 
 
 
@@ -179,19 +179,65 @@ def mouth_mustache():
     painter.penup()
 #-------------------------- Hat definitions
 def hat_first():
-    painter.goto(0,70)
+    painter.pensize(5)
+    painter.pencolor('black')
+    painter.fillcolor('black')
+
+    painter.goto(47,150)
+    painter.setheading(90)
     painter.pendown()
-    painter.circle(90,180,3)
-    print('drawing first hat')
+    painter.begin_fill()
+    painter.circle(50,180,4)
+    painter.end_fill()
+    painter.setheading(180)
+    painter.forward(10)
+    painter.right(180)
+    painter.forward(120)
+
 
 def hat_second():
-    painter.circle(20,180)
-    print('second hat drawn')
+    painter.pensize(15)
+    painter.pencolor('blue')
+    painter.fillcolor('blue')
+
+    painter.goto(47,150)
+    painter.setheading(90)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(50,180)
+    painter.end_fill()
+    painter.setheading(180)
+    painter.forward(40)
+    painter.right(180)
+    painter.forward(135)
+
+    painter.pensize(5)
+    painter.pencolor('darkblue')
+    painter.fillcolor('darkblue')
+
+    painter.setheading(45)
+    painter.begin_fill()
+    painter.circle(15,360,4)
+    painter.end_fill()
+    painter.penup()
+
+
 
 potatohead_list = []
 
+ # Draw potato body
+painter.pensize(2)
+painter.pencolor('black')
+painter.fillcolor('tan')
+
+painter.begin_fill()
+painter.circle(80)
+painter.end_fill()
+painter.penup()
 
 
+hat_second()
+'''
 active = 'y'
 while active == 'y':
     painter.goto(0,0)
@@ -229,17 +275,20 @@ while active == 'y':
     elif hat != int:
         exit()
         
-# Drawing the features     
+# Drawing the features    
     for i in potatohead_list:
         i()
-        potatohead_list.pop()
+
+    for p in range(2):
+        potatohead_list.pop()    
 
     active = trtl.textinput('Repeat', 'y/n to restart?')
     trtl.clearscreen()
+    eyes = ''
+    mouth = ''
+    hat = ''
 #----------------------------------------
-
-
-print(potatohead_list)
+'''
 
 
 
