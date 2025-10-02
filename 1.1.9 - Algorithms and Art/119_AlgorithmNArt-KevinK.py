@@ -1,12 +1,12 @@
 import turtle as trtl
 painter = trtl.Turtle()
 painter.speed(0)
-
+painter.shapesize(6)
 
 
 #-------------------------- Eye definitions
 def eyes_regular():
-    painter.pencolor('black')
+    painter.pencolor('white')
     painter.fillcolor('white')
 
     painter.goto(-20,80)
@@ -194,7 +194,6 @@ def hat_first():
     painter.right(180)
     painter.forward(120)
 
-
 def hat_second():
     painter.pensize(15)
     painter.pencolor('blue')
@@ -222,14 +221,30 @@ def hat_second():
     painter.penup()
 
 
+def arm():
+    painter.pensize(30)
+    painter.pencolor('lightgrey')
+    painter.fillcolor('lightgrey')
+
+    painter.pendown()
+    painter.circle(-50,70)
+    painter.penup()
+
+
+
 
 potatohead_list = []
 
 
+
 active = 'y'
 while active == 'y':
+    # Reset turtle
+    painter.showturtle()
+    painter.shapesize(6)
     painter.goto(0,0)
     painter.setheading(0)
+
      # Draw potato body
     painter.pensize(2)
     painter.pencolor('black')
@@ -239,6 +254,23 @@ while active == 'y':
     painter.circle(80)
     painter.end_fill()
     painter.penup()
+
+    # Draw potato arms
+    painter.goto(90,80)
+    arm()
+    painter.setheading(135)
+    painter.goto(-90,80)
+    arm()
+
+    # Draw potato feet
+    painter.pensize(10)
+    painter.fillcolor('blue')
+    painter.pencolor('blue')
+
+
+
+    painter.setheading(0)
+    painter.pensize(2)
 #------------------------------------ User inputs
     eyes = trtl.textinput('Create Mr. Potato Head', 'y/n for glasses')
     if eyes == 'y':
@@ -263,14 +295,18 @@ while active == 'y':
         potatohead_list.append(hat_second)
     elif hat != int:
         exit()
-        
+    
 # Drawing the features    
     for i in potatohead_list:
         i()
+    painter.hideturtle()
 
     active = trtl.textinput('Repeat', 'y/n to restart?')
-    trtl.clearscreen()
-    potatohead_list = []
+    if active == 'y':
+        trtl.clearscreen()
+        potatohead_list = []
+    else:
+        print('stopped')
 #----------------------------------------
 
 
