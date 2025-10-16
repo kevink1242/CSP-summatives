@@ -1,8 +1,10 @@
 import turtle as trtl
 painter = trtl.Turtle()
-painter.speed(0.3)
-painter.shapesize(6)
+painter.speed(0.5)
+painter.shapesize(5)
 
+trtl.addshape('hand2', ((4,-11), (-4,-11), (-9,-6), (-8,-5), (-6,-5), (-6,4), (-3,4), (-3,-1), (-2,-1), (-2, 4), (0,4), (0,-1), (1,-1), (1,4), (5,4), (4,-4)))
+painter.shape('hand2')
 
 #-------------------------- Eye definitions
 def eyes_regular():
@@ -241,11 +243,11 @@ active = 'y'
 while active == 'y':
     # Reset turtle
     painter.showturtle()
-    painter.shapesize(6)
     painter.goto(0,0)
     painter.setheading(0)
 
      # Draw potato body
+    painter.pendown()
     painter.pensize(2)
     painter.pencolor('black')
     painter.fillcolor('tan')
@@ -273,7 +275,7 @@ while active == 'y':
     painter.circle(25)
     painter.end_fill()
     painter.penup()
-    painter.goto(50,-30)
+    painter.goto(50,-30) 
     painter.pendown()
     painter.begin_fill()
     painter.circle(25)
@@ -317,8 +319,9 @@ while active == 'y':
 
     active = trtl.textinput('Repeat', 'y/n to restart?')
     if active == 'y':
-        trtl.clearscreen()
+        painter.clear()
         potatohead_list = []
+        painter.penup()
     else:
         print('stopped')
 #----------------------------------------
