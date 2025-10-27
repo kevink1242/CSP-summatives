@@ -17,3 +17,8 @@
 
 # TODO 9: Win screen, showing the cookie being cracked? Displaying points and name
 
+# TODO OPTIONAL (10): Turtle tracing the shape of the cookie as keys are being pressed (OPTIONAL)
+
+# TODO 11: Leaderboard (Create a txt file)
+
+# TODO 12: Animation of revealing the inital selection of the cookie
