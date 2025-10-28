@@ -12,6 +12,8 @@ xcord = -265
 
 original_letter_list = list('qwertyuiopasdfghjklzxcvbnm')
 
+updated_letter_list = list()
+
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: the menu screen basically
 
@@ -118,7 +120,7 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
-cookie_list = [draw_circle, draw_triangle, draw_star, draw_umbrella]
+cookie_list = [draw_triangle, draw_circle, draw_star, draw_umbrella]
 
 
 #-------FUNCTIONS-------
@@ -130,11 +132,17 @@ def select_shape(x,y):
     return cookieselection
 
 
-
+player_name = player_name[:max_char]
 def list_cap(cookienum):
     # Different levels of difficulty based on the integer of cookienum (userselection)
     cap = 0
+    listlength = len(original_letter_list)
     if cookienum == 0:
+        cap = 6
+    elif cookienum == 1:
+        cap = 
+    else:
+        cap = 0
 
     
     
@@ -169,10 +177,10 @@ for d in placeholder_list:
     
 # Drawing the shape
 if userselection == 0:
-    draw_circle()
+    draw_triangle()
     print('drawn circle')
 elif userselection == 1:
-    draw_triangle()
+    draw_circle()
     print('drawn triangle')
 elif userselection == 2:
     draw_star()
