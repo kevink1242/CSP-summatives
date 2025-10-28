@@ -137,7 +137,6 @@ def list_cap(cookienum):
     
 
 
-# TODO 4: List of letters 'list()' that cap out based on the number from todo 3.1
 
 # TODO 6: Have letters show up next to the cookie, that will change like in apple avalanche
 
@@ -160,8 +159,18 @@ while starting:
     placeholder_list[3].onclick(select_shape)
 
 userselection = select_shape(0,0)
-print('userselection variable: ',userselection)
-list_cap(userselection)
+for d in range(3):
+    index = d
+    
+
+if userselection == 0:
+    draw_circle()
+elif userselection == 1:
+    draw_triangle()
+elif userselection == 2:
+    draw_star()
+elif userselection == 3:
+    draw_umbrella()        
 
 
 
