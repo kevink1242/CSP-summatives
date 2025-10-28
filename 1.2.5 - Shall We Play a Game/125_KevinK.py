@@ -116,13 +116,16 @@ cookie_list = [draw_circle, draw_triangle, draw_star, draw_umbrella]
 
 #-------FUNCTIONS-------
 def select_shape(x,y):
+    global starting
     cookieselection = rand.randint(0,len(cookie_list))
+    starting = False
     
     return cookieselection
 
 original_letter_list = list('qwertyuiopasdfghjklzxcvbnm')
 
-def start_game():
+def list_cap():
+    global userselection
 
 
 # TODO 3: From todo 1, create a function that'll randomly generate a number
@@ -142,12 +145,16 @@ def start_game():
 # TODO 5: Display the shape of the cookie
 
 
-placeholder_list[0].onclick(select_shape)
-placeholder_list[1].onclick(select_shape)
-placeholder_list[2].onclick(select_shape)
-placeholder_list[3].onclick(select_shape)
+starting = True
+
+while starting:
+    placeholder_list[0].onclick(select_shape)
+    placeholder_list[1].onclick(select_shape)
+    placeholder_list[2].onclick(select_shape)
+    placeholder_list[3].onclick(select_shape)
 
 userselection = select_shape(0,0)
+print(userselection)
 
 
 
