@@ -110,13 +110,15 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
-# TODO 2: Functions to draw out the 4 cookies
-# TODO 2.1: List storing these functions
+cookie_list = [draw_circle, draw_triangle, draw_star, draw_umbrella]
 
 
 #-------FUNCTIONS-------
 def select_shape(x,y):
-    print('dafcn')
+    global placeholdercookie
+    cookieselection = rand.randint(0,len(cookie_list))
+
+    return cookieselection
 
 # TODO 3: From todo 1, create a function that'll randomly generate a number
 # TODO 3.1: return a number from the function based on the cookie selected
