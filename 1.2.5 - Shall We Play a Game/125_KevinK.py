@@ -10,9 +10,8 @@ wn.cv._rootwindow.resizable(False, False)
 #------VARIABLES-----
 xcord = -265
 
-original_letter_list = list('qwertyuiopasdfghjklzxcvbnm')
-
-updated_letter_list = list()
+letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
+current_letter = ''
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: the menu screen basically
@@ -34,6 +33,8 @@ painter.penup()
 painter.hideturtle()
 painter.speed(0)
 penS = 5
+
+
 
 #----------COOKIE RELATED------------
 def draw_circle():
@@ -130,33 +131,34 @@ def select_shape(x,y):
     
     return cookieselection
 
-def draw_shape():
-    if userselection == 1:
+def draw_shape(num):
+    if num == 1:
         draw_triangle()
         print('drawn circle')
-    elif userselection == 2:
+    elif num == 2:
         draw_circle()
         print('drawn triangle')
-    elif userselection == 3:
+    elif num == 3:
         draw_star()
         print('drawn star')
-    elif userselection == 4:
+    elif num == 4:
         draw_umbrella()
         print('drawn umbrella')
+
 def list_cap(cookienum):
     # Different levels of difficulty based on the integer of cookienum (userselection)
     cap = 0
-    listlength = len(original_letter_list)
-    if cookienum == 0:
+    if cookienum == 1:
         cap = 10
-    elif cookienum == 1:
-        cap = 15
     elif cookienum == 2:
+        cap = 15
+    elif cookienum == 3:
         cap = 20
     else:
         cap = 0
-    
-    return cap
+    len(letter_list) = cap
+
+print(letter_list)
 
     
     
@@ -184,11 +186,11 @@ while starting:
 
 # After exiting the while loop, the userselection variable is assigned a variable based on the return from the function
 userselection = select_shape(0,0)
-print('userselection variable: ',userselection)
 
 for d in placeholder_list:
     d.hideturtle()
     
+draw_shape(userselection)
 list_cap(userselection) # Giving the parameter the value of userselection
 
 
