@@ -6,15 +6,18 @@ xcord = -265
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: starting the game basically
+
+placeholder_list = []
 for s in range(4):
-    shapeselection = trtl.Turtle(shape='circle')
-    shapeselection.speed(0)
-    shapeselection.penup()
-    shapeselection.turtlesize(8)
-    shapeselection.color('tan')
-    shapeselection.goto(xcord, 0)
+    placeholdercookie = trtl.Turtle(shape='circle')
+    placeholdercookie.speed(0)
+    placeholdercookie.penup()
+    placeholdercookie.turtlesize(8)
+    placeholdercookie.color('tan')
+    placeholdercookie.goto(xcord, 0)
 
     xcord += 175
+    placeholder_list.append(placeholdercookie)
 
 painter = trtl.Turtle()
 painter.penup()
@@ -24,6 +27,7 @@ penS = 5
 
 #----------COOKIE RELATED------------
 def draw_circle():
+    painter.setheading(0)
     painter.pensize(penS)
     painter.fillcolor('tan')
     painter.pencolor('tan')
@@ -34,13 +38,77 @@ def draw_circle():
     painter.begin_fill()
     painter.circle(150)
     painter.end_fill()
-    painter.penup
+    painter.penup()
 
     # The shape part
     painter.pencolor('black')
-    painter.goto(-200,-100)
-    painter.pensize(1)
-    painter.circle(75)
+    painter.goto(-200,-85)
+    painter.pendown()
+    painter.circle(100)
+    painter.penup()
+
+def draw_triangle():
+    painter.setheading(0)
+    painter.pensize(penS)
+    painter.fillcolor('tan')
+    painter.pencolor('tan')
+
+    # The cookie part
+    painter.goto(-200,-125)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(150)
+    painter.end_fill()
+    painter.penup()
+
+    # The shape part
+    painter.pencolor('black')
+    painter.goto(-200,-80)
+    painter.pendown()
+    painter.circle(100,360,3)
+    painter.penup()
+
+def draw_star():
+    painter.setheading(0)
+    painter.pensize(penS)
+    painter.fillcolor('tan')
+    painter.pencolor('tan')
+
+    # The cookie part
+    painter.goto(-200,-125)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(150)
+    painter.end_fill()
+    painter.penup()
+
+    # The shape part
+    painter.pencolor('black')
+    painter.goto(-200,-80)
+    painter.pendown()
+    painter.circle(100,360,6)
+    painter.penup()
+
+def draw_umbrella():
+    painter.setheading(0)
+    painter.pensize(penS)
+    painter.fillcolor('tan')
+    painter.pencolor('tan')
+
+    # The cookie part
+    painter.goto(-200,-125)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(150)
+    painter.end_fill()
+    painter.penup()
+
+    # The shape part
+    painter.pencolor('black')
+    painter.goto(-200,-80)
+    painter.pendown()
+    painter.circle(100,180)
+    painter.penup()
 
 # TODO 2: Functions to draw out the 4 cookies
 # TODO 2.1: List storing these functions
@@ -48,7 +116,7 @@ def draw_circle():
 
 #-------FUNCTIONS-------
 def select_shape(x,y):
-    print('nvdjs zcx')
+    print('dafcn')
 
 # TODO 3: From todo 1, create a function that'll randomly generate a number
 # TODO 3.1: return a number from the function based on the cookie selected
@@ -66,8 +134,11 @@ def select_shape(x,y):
 #----------GAME-----------
 # TODO 5: Display the shape of the cookie
 
-draw_circle()
-shapeselection.onclick(select_shape)
+
+placeholder_list[0].onclick(select_shape)
+placeholder_list[1].onclick(select_shape)
+placeholder_list[2].onclick(select_shape)
+placeholder_list[3].onclick(select_shape)
 
 
 
