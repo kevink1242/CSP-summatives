@@ -159,8 +159,9 @@ while starting:
     placeholder_list[3].onclick(select_shape)
 
 userselection = select_shape(0,0)
-for d in range(3):
-    index = d
+
+for d in placeholder_list:
+    d.hideturtle()
     
 
 if userselection == 0:
