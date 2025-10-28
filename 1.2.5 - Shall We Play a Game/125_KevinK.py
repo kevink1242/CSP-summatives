@@ -16,15 +16,40 @@ for s in range(4):
 
     xcord += 175
 
-
-# TODO 1: Initalizing turtles with onclick events that'll call on a function to randomly generate a number
+painter = trtl.Turtle()
+painter.penup()
+painter.hideturtle()
+painter.speed(0)
+penS = 5
 
 #----------COOKIE RELATED------------
+def draw_circle():
+    painter.pensize(penS)
+    painter.fillcolor('tan')
+    painter.pencolor('tan')
+
+    # The cookie part
+    painter.goto(-200,-125)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(150)
+    painter.end_fill()
+    painter.penup
+
+    # The shape part
+    painter.pencolor('black')
+    painter.goto(-200,-100)
+    painter.pensize(1)
+    painter.circle(75)
+
 # TODO 2: Functions to draw out the 4 cookies
 # TODO 2.1: List storing these functions
 
 
 #-------FUNCTIONS-------
+def select_shape(x,y):
+    print('nvdjs zcx')
+
 # TODO 3: From todo 1, create a function that'll randomly generate a number
 # TODO 3.1: return a number from the function based on the cookie selected
 
@@ -41,7 +66,8 @@ for s in range(4):
 #----------GAME-----------
 # TODO 5: Display the shape of the cookie
 
-shapeselection.onclick(shapeselection.xcor,shapeselection.ycor)
+draw_circle()
+shapeselection.onclick(select_shape)
 
 
 
