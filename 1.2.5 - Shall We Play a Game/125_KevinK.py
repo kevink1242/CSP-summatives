@@ -1,9 +1,16 @@
 import turtle as trtl
 import random as rand
 
+#-----SCREEN SETUP-----
+wn = trtl.Screen()
+
+wn.setup(width=750, height=600)
+wn.cv._rootwindow.resizable(False, False)
+
 #------VARIABLES-----
 xcord = -265
 
+original_letter_list = list('qwertyuiopasdfghjklzxcvbnm')
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: starting the game basically
@@ -122,14 +129,13 @@ def select_shape(x,y):
     
     return cookieselection
 
-original_letter_list = list('qwertyuiopasdfghjklzxcvbnm')
-
-def list_cap():
-    global userselection
 
 
-# TODO 3: From todo 1, create a function that'll randomly generate a number
-# TODO 3.1: return a number from the function based on the cookie selected
+def list_cap(cookienum):
+    print('cookienum variable: ',cookienum)
+    
+    
+
 
 # TODO 4: List of letters 'list()' that cap out based on the number from todo 3.1
 
@@ -154,7 +160,8 @@ while starting:
     placeholder_list[3].onclick(select_shape)
 
 userselection = select_shape(0,0)
-print(userselection)
+print('userselection variable: ',userselection)
+list_cap(userselection)
 
 
 
@@ -168,10 +175,7 @@ print(userselection)
 
 
 
-wn = trtl.Screen()
 
-wn.setup(width=750, height=600)
-wn.cv._rootwindow.resizable(False, False)
 
 wn.mainloop()
 
