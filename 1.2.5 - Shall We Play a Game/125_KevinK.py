@@ -120,29 +120,43 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
-cookie_list = [draw_triangle, draw_circle, draw_star, draw_umbrella]
 
 
 #-------FUNCTIONS-------
 def select_shape(x,y):
     global starting
-    cookieselection = rand.randint(0,len(cookie_list)-1)
+    cookieselection = rand.randint(1,4)
     starting = False
     
     return cookieselection
 
-
-player_name = player_name[:max_char]
+def draw_shape():
+    if userselection == 1:
+        draw_triangle()
+        print('drawn circle')
+    elif userselection == 2:
+        draw_circle()
+        print('drawn triangle')
+    elif userselection == 3:
+        draw_star()
+        print('drawn star')
+    elif userselection == 4:
+        draw_umbrella()
+        print('drawn umbrella')
 def list_cap(cookienum):
     # Different levels of difficulty based on the integer of cookienum (userselection)
     cap = 0
     listlength = len(original_letter_list)
     if cookienum == 0:
-        cap = 6
+        cap = 10
     elif cookienum == 1:
-        cap = 
+        cap = 15
+    elif cookienum == 2:
+        cap = 20
     else:
         cap = 0
+    
+    return cap
 
     
     
@@ -175,19 +189,6 @@ print('userselection variable: ',userselection)
 for d in placeholder_list:
     d.hideturtle()
     
-# Drawing the shape
-if userselection == 0:
-    draw_triangle()
-    print('drawn circle')
-elif userselection == 1:
-    draw_circle()
-    print('drawn triangle')
-elif userselection == 2:
-    draw_star()
-    print('drawn star')
-elif userselection == 3:
-    draw_umbrella()
-    print('drawn umbrella')
 list_cap(userselection) # Giving the parameter the value of userselection
 
 
