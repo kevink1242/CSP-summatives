@@ -138,9 +138,11 @@ def list_cap(cookienum):
     cap = 0
     listlength = len(original_letter_list)
     if cookienum == 0:
-        cap = 6
+        cap = 10
     elif cookienum == 1:
-        cap = 
+        cap = 15
+    elif cookienum == 2:
+        cap = 20
     else:
         cap = 0
 
