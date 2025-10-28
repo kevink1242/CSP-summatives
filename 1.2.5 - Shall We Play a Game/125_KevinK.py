@@ -1,8 +1,22 @@
 import turtle as trtl
 import random as rand
 
+#------VARIABLES-----
+xcord = -265
 
 #-------TURTLES--------
+# the turtles for selecting a shape to cut out: starting the game basically
+for s in range(4):
+    shapeselection = trtl.Turtle(shape='circle')
+    shapeselection.speed(0)
+    shapeselection.penup()
+    shapeselection.turtlesize(8)
+    shapeselection.color('tan')
+    shapeselection.goto(xcord, 0)
+
+    xcord += 175
+
+
 # TODO 1: Initalizing turtles with onclick events that'll call on a function to randomly generate a number
 
 #----------COOKIE RELATED------------
@@ -27,6 +41,7 @@ import random as rand
 #----------GAME-----------
 # TODO 5: Display the shape of the cookie
 
+shapeselection.onclick(shapeselection.xcor,shapeselection.ycor)
 
 
 
@@ -40,7 +55,12 @@ import random as rand
 
 
 
+wn = trtl.Screen()
 
+wn.setup(width=750, height=600)
+wn.cv._rootwindow.resizable(False, False)
+
+wn.mainloop()
 
 
 
