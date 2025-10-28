@@ -13,7 +13,7 @@ xcord = -265
 original_letter_list = list('qwertyuiopasdfghjklzxcvbnm')
 
 #-------TURTLES--------
-# the turtles for selecting a shape to cut out: starting the game basically
+# the turtles for selecting a shape to cut out: the menu screen basically
 
 placeholder_list = []
 for s in range(4):
@@ -124,7 +124,7 @@ cookie_list = [draw_circle, draw_triangle, draw_star, draw_umbrella]
 #-------FUNCTIONS-------
 def select_shape(x,y):
     global starting
-    cookieselection = rand.randint(0,len(cookie_list))
+    cookieselection = rand.randint(0,len(cookie_list)-1)
     starting = False
     
     return cookieselection
@@ -149,8 +149,8 @@ def list_cap(cookienum):
 #----------GAME-----------
 # TODO 5: Display the shape of the cookie
 
-
-starting = True
+# Pauses the program from continuing and assigning a value to 'userselection'
+starting = True # Variable is set to false in the select_shape function
 
 while starting:
     placeholder_list[0].onclick(select_shape)
@@ -158,20 +158,28 @@ while starting:
     placeholder_list[2].onclick(select_shape)
     placeholder_list[3].onclick(select_shape)
 
+# After exiting the while loop, the userselection variable is assigned a variable based on the return from the function
 userselection = select_shape(0,0)
+print('userselection variable: ',userselection)
 
 for d in placeholder_list:
     d.hideturtle()
     
-
+# Drawing the shape
 if userselection == 0:
     draw_circle()
+    print('drawn circle')
 elif userselection == 1:
     draw_triangle()
+    print('drawn triangle')
 elif userselection == 2:
     draw_star()
+    print('drawn star')
 elif userselection == 3:
-    draw_umbrella()        
+    draw_umbrella()
+    print('drawn umbrella')
+list_cap(userselection) # Giving the parameter the value of userselection
+
 
 
 
