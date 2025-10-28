@@ -132,7 +132,10 @@ def select_shape(x,y):
 
 
 def list_cap(cookienum):
-    print('cookienum variable: ',cookienum)
+    # Different levels of difficulty based on the integer of cookienum (userselection)
+    cap = 0
+    if cookienum == 0:
+
     
     
 
@@ -147,7 +150,6 @@ def list_cap(cookienum):
 
 
 #----------GAME-----------
-# TODO 5: Display the shape of the cookie
 
 # Pauses the program from continuing and assigning a value to 'userselection'
 starting = True # Variable is set to false in the select_shape function
