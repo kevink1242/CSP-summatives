@@ -132,33 +132,30 @@ def select_shape(x,y):
     return cookieselection
 
 def draw_shape(num):
+    # The number that'll set how many letters are to be pressed for each shape: removing any letters after the number
+    cap = 0
     if num == 1:
         draw_triangle()
-        print('drawn circle')
+        cap = 10
     elif num == 2:
         draw_circle()
-        print('drawn triangle')
+        cap = 15
     elif num == 3:
         draw_star()
-        print('drawn star')
+        cap = 20
     elif num == 4:
         draw_umbrella()
-        print('drawn umbrella')
-
-def list_cap(cookienum):
-    # Different levels of difficulty based on the integer of cookienum (userselection)
-    cap = 0
-    if cookienum == 1:
-        cap = 10
-    elif cookienum == 2:
-        cap = 15
-    elif cookienum == 3:
-        cap = 20
-    else:
         cap = 0
-    len(letter_list) = cap
+    
+    list_cap(cap)
 
-print(letter_list)
+def list_cap(listlength):
+    while len(letter_list) not in range(listlength):
+        index = 0
+        letter_list.pop(index)
+
+        index += 1
+        print(letter_list)
 
     
     
