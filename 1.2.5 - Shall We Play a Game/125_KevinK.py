@@ -4,6 +4,7 @@ import random as rand
 #------VARIABLES-----
 xcord = -265
 
+
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: starting the game basically
 
@@ -115,10 +116,13 @@ cookie_list = [draw_circle, draw_triangle, draw_star, draw_umbrella]
 
 #-------FUNCTIONS-------
 def select_shape(x,y):
-    global placeholdercookie
+    global userselection
     cookieselection = rand.randint(0,len(cookie_list))
-
+    
     return cookieselection
+
+
+
 
 # TODO 3: From todo 1, create a function that'll randomly generate a number
 # TODO 3.1: return a number from the function based on the cookie selected
@@ -141,6 +145,9 @@ placeholder_list[0].onclick(select_shape)
 placeholder_list[1].onclick(select_shape)
 placeholder_list[2].onclick(select_shape)
 placeholder_list[3].onclick(select_shape)
+
+userselection = select_shape()
+
 
 
 
