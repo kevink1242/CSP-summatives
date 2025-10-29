@@ -10,10 +10,8 @@ wn.cv._rootwindow.resizable(False, False)
 #------VARIABLES-----
 xcord = -265
 
-original_letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
-current_letter = ''
-
-updated_letter_list = list()
+letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
+currentletter = ''
 
 
 #-------TURTLES--------
@@ -36,6 +34,11 @@ painter.penup()
 painter.hideturtle()
 painter.speed(0)
 penS = 5
+
+writer = trtl.Turtle(shape='circle')
+writer.penup()
+writer.hideturtle()
+writer.speed(0)
 
 
 
@@ -153,17 +156,18 @@ def draw_shape(num):
     list_cap(cap)
 
 def list_cap(caplength):
-    print(caplength)
     done = False
     while done == False:
-        if len(original_letter_list) != caplength:
-            indexrand = rand.randint(0,len(original_letter_list)-1)
-            letterselection = original_letter_list.pop(indexrand)
+        if len(letter_list) != caplength:
+            indexrand = rand.randint(0,len(letter_list)-1)
+            letter_list.pop(indexrand)
 
-            updated_letter_list.append(letterselection)
         else:
             done = True
 
+def draw_letter():
+    global currentletter
+    global writer
 
 
 # TODO 6: Have letters show up next to the cookie, that will change like in apple avalanche
@@ -193,7 +197,6 @@ for d in placeholder_list:
     
 draw_shape(userselection)
 
-print(len(original_letter_list))
 
 
 #--------SCREEN--------
