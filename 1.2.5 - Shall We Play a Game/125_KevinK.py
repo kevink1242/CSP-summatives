@@ -148,18 +148,13 @@ def draw_shape(num):
         cap = 20
     elif num == 4:
         draw_umbrella()
-        cap = 0
+        cap = 26
     
     list_cap(cap)
 
 def list_cap(caplength):
-    while len(original_letter_list) != caplength:
-        indexrand = rand.randint(0,len(original_letter_list)-1)
-        letterselection = original_letter_list.pop(indexrand)
-
-        indexrand += 1
-        updated_letter_list.append(letterselection)
-        print(len(updated_letter_list))
+    original_letter_list[:caplength]
+        
 
     
     
@@ -194,7 +189,7 @@ for d in placeholder_list:
 draw_shape(userselection)
 list_cap(userselection) # Giving the parameter the value of userselection
 
-
+print(len(original_letter_list))
 
 
 #--------SCREEN--------
