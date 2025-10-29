@@ -153,11 +153,16 @@ def draw_shape(num):
     list_cap(cap)
 
 def list_cap(caplength):
-    original_letter_list[:caplength]
-        
+    print(caplength)
+    done = False
+    while done == False:
+        if len(original_letter_list) != caplength:
+            indexrand = rand.randint(0,len(original_letter_list)-1)
+            letterselection = original_letter_list.pop(indexrand)
 
-    
-    
+            updated_letter_list.append(letterselection)
+        else:
+            done = True
 
 
 
@@ -187,7 +192,6 @@ for d in placeholder_list:
     d.hideturtle()
     
 draw_shape(userselection)
-list_cap(userselection) # Giving the parameter the value of userselection
 
 print(len(original_letter_list))
 
