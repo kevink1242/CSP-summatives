@@ -10,8 +10,11 @@ wn.cv._rootwindow.resizable(False, False)
 #------VARIABLES-----
 xcord = -265
 
-letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
+original_letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
 current_letter = ''
+
+updated_letter_list = list()
+
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: the menu screen basically
@@ -149,13 +152,14 @@ def draw_shape(num):
     
     list_cap(cap)
 
-def list_cap(listlength):
-    while len(letter_list) not in range(listlength):
-        index = 0
-        letter_list.pop(index)
+def list_cap(caplength):
+    while len(original_letter_list) != caplength:
+        indexrand = rand.randint(0,len(original_letter_list)-1)
+        letterselection = original_letter_list.pop(indexrand)
 
-        index += 1
-        print(letter_list)
+        indexrand += 1
+        updated_letter_list.append(letterselection)
+        print(len(updated_letter_list))
 
     
     
