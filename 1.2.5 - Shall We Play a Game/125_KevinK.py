@@ -7,11 +7,13 @@ wn = trtl.Screen()
 wn.setup(width=750, height=600)
 wn.cv._rootwindow.resizable(False, False)
 
+wn.listen()
+
 #------VARIABLES-----
 xcord = -265
 
 letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
-currentletter = ''
+currentletter = 'E'
 
 
 #-------TURTLES--------
@@ -37,8 +39,11 @@ penS = 5
 
 writer = trtl.Turtle(shape='circle')
 writer.penup()
+writer.color('lightgray')
+writer.turtlesize(5)
 writer.hideturtle()
 writer.speed(0)
+writer.goto(200,0)
 
 
 
@@ -165,9 +170,16 @@ def list_cap(caplength):
         else:
             done = True
 
-def draw_letter():
+def check_key(key):
+    # Dont need 'global currentletter' as the variable isn't being changed
+    if currentletter.lower() == key:
+        draw_letter(key)
+
+def draw_letter(letter):
     global currentletter
-    global writer
+
+    writer.showturtle()
+
 
 
 # TODO 6: Have letters show up next to the cookie, that will change like in apple avalanche
@@ -196,6 +208,12 @@ for d in placeholder_list:
     d.hideturtle()
     
 draw_shape(userselection)
+draw_letter(currentletter)
+
+for letter in 'qwertyuiopasdfghjklzxcvbnm':
+    wn.onkeypress(lambda l=letter: check_key(l), letter)
+
+# lambda is essentially creating a function with a singular parameter, giving it to the check_key() function
 
 
 
