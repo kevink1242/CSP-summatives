@@ -59,14 +59,13 @@ writer.color('green')
 writer.goto(200,-50)
 
 # For the timer
-fontsetup = 
+fontsetup = ('Arial',35,'normal')
+
 timekeeper = trtl.Turtle()
 timekeeper.hideturtle()
 timekeeper.penup()
 timekeeper.color('black')
 timekeeper.goto(-350,250)
-
-timekeeper.write('timer', font=('Arial',35,'normal'))
 
 
 #----------COOKIE RELATED------------
@@ -219,7 +218,9 @@ def timer():
     if totaltime <= 0:
         print('rsdf') # eventually call a function to end the game
     else:
-        timekeeper.write('Time left: '+ str(totaltime), font=)
+        timekeeper.write('Time left: '+ str(totaltime), font=fontsetup)
+        totaltime -= 1
+        timekeeper.getscreen().ontimer(timer, counter_interval)
     '''
     global totaltime, timer_up
     counter.clear()
@@ -233,9 +234,11 @@ def timer():
         counter.getscreen().ontimer(countdown, counter_interval)'''
 
 
-# TODO 7: Timer
 
-# TODO 8: Point system, removing a point whenever a wrong key is pressed/adding a point whenever a right key is pressed
+# TODO 7.5.1: Create a losing end game function (timer & crack cookie)
+# TODO 7.5.2: Create a winning end game function (completing the cookie)
+# TODO 8: removing the point system: lives system instead
+# TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
 
 
 
@@ -258,6 +261,7 @@ for d in placeholder_list:
     
 draw_shape(userselection)
 draw_letter(currentletter)
+timer()
 
 for letter in 'qwertyuiopasdfghjklzxcvbnm':
     wn.onkeypress(lambda l=letter: check_key(l), letter)
