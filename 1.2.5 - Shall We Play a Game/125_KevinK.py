@@ -18,7 +18,6 @@ currentletter = 'E'
 # Timer
 totaltime = 10
 counter_interval = 1000
-timer_up = False
 
 
 
@@ -222,24 +221,30 @@ def reset_letter():
         currentletter = letter_list.pop(index)
         draw_letter(currentletter)
     else:
-        game_end(True)
+        game_end(True, False) # The letters ran out
 
 def timer():
-    global totaltime, timer_up
+    global totaltime
     timekeeper.clear()
 
     if totaltime <= 0:
-        game_end(False)
+        game_end(False, True) # Winning the game is false, but the time ran out initiating a game end
     else:
         timekeeper.write('Time left: '+ str(totaltime), font=fontsetup)
         totaltime -= 1
         timekeeper.getscreen().ontimer(timer, counter_interval)
 
+def game_end(win, timerup):
+    global letter_list
 
-def game_end(win):
-    if win:
+    letter_list = list()
+    timekeeper.clear()
+    writer.clear()
+    keysignifier.hideturtle()
+
+    if win == True and timerup == False:
         print('winner!')
-    else:
+    elif win == False and timerup == True:
         print('loser')
     
 
