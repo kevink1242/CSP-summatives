@@ -15,11 +15,15 @@ xcord = -265
 letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
 currentletter = 'E'
 
-lives = 5
+lives = 3
 
 # Timer
 totaltime = 10
 counter_interval = 1000
+
+
+gamefin = False # Variable for if the game is finished
+# Essentially only purpose is for the timer. Fixed the issue of the timer counting down even after finishing the game
 
 
 
@@ -48,7 +52,7 @@ penS = 5
 keysignifier = trtl.Turtle(shape='circle')
 keysignifier.hideturtle()
 keysignifier.penup()
-keysignifier.color('lightgray')
+keysignifier.color('darkgray')
 keysignifier.turtlesize(5)
 keysignifier.goto(200,0)
 
@@ -65,8 +69,8 @@ fontsetup = ('Arial',35,'normal')
 timekeeper = trtl.Turtle()
 timekeeper.hideturtle()
 timekeeper.penup()
-timekeeper.color('black')
-timekeeper.goto(-350,250)
+timekeeper.color('red')
+timekeeper.goto(-100,-200)
 
 
 #----------COOKIE RELATED------------
@@ -154,6 +158,13 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
+def draw_cookiecrack():
+    painter.clear()
+    painter.setheading(0)
+    painter.goto(-200, -125)
+
+    painter.pendown()
+    painter.circle(150,180)
 
 #-------FUNCTIONS-------
 def select_shape(x,y): # Responsible for starting the game
@@ -192,14 +203,12 @@ def list_cap(caplength):
             done = True
 
 def check_key(key):
-    global lives
     # Dont need 'global currentletter' as the variable isn't being changed
     if currentletter.lower() == key:
         reset_letter()
-    else:
-        lives_handler()
-
-
+    elif currentletter.lower() != key:
+        if lives > 0:
+            lives_handler()
 
 def draw_letter(letter):
     keysignifier.showturtle()
@@ -220,12 +229,13 @@ def timer():
     global totaltime
     timekeeper.clear()
 
-    if totaltime <= 0:
-        game_end(False, True) # Winning the game is false, but the time ran out initiating a game end
-    else:
-        timekeeper.write('Time left: '+ str(totaltime), font=fontsetup)
-        totaltime -= 1
-        timekeeper.getscreen().ontimer(timer, counter_interval)
+    if gamefin == False:
+        if totaltime <= 0:
+            game_end(False, True) # Winning the game is false, but the time ran out initiating a game end
+        else:
+            timekeeper.write('Time left: '+ str(totaltime), font=fontsetup)
+            totaltime -= 1
+            timekeeper.getscreen().ontimer(timer, counter_interval)
 
 def lives_handler():
     global lives
@@ -233,33 +243,30 @@ def lives_handler():
     lives -= 1
     print('lost a life: down to ', lives, ' left')
     if lives < 1:
-        game_end(False, False)
+        game_end(False, False) # Both winning the game and the timer being up is false
     else:
         print('showcase the mistake on the cookie itself?')
     
-
 def game_end(win, timerup):
-    global letter_list
+    global letter_list, gamefin
+    
+    gamefin = True
 
     letter_list = list()
     timekeeper.clear()
     writer.clear()
     keysignifier.hideturtle()
 
-    if win == True and timerup == False:
+    if win == True and timerup == False: # Won the game fully
         print('winner!')
-    elif win == False and timerup == True:
-        print('ran out of time')
-    elif win == False and timerup == False:
+    elif win == False and timerup == True: # Ran out of time
+        timekeeper.write('OUT OF TIME', font=fontsetup)
+        draw_cookiecrack()
+        
+    elif win == False and timerup == False: # Ran out of lives
         print('cracked the cookie')
-    
+        draw_cookiecrack()
 
-
-# TODO 7.5.1: Create a losing end game function (timer & crack cookie)
-# TODO 7.5.2: Create a winning end game function (completing the cookie)
-
-
-# TODO 8: removing the point system: lives system instead
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
 
 # TODO ???: SCORE SYSTEM CAN BE ACCULMATED BY THE AMOUNT OF KEYS PRESSED
@@ -327,5 +334,3 @@ wn.mainloop()
 # TODO OPTIONAL (10): Turtle tracing the shape of the cookie as keys are being pressed (OPTIONAL)
 
 # TODO 11: Leaderboard (Create a txt file)
-
-# TODO 12: Animation of revealing the inital selection of the cookie
