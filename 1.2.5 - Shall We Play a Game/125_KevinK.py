@@ -37,14 +37,18 @@ painter.hideturtle()
 painter.speed(0)
 penS = 5
 
-writer = trtl.Turtle(shape='circle')
-writer.penup()
-writer.color('lightgray')
-writer.turtlesize(5)
-writer.hideturtle()
-writer.speed(0)
-writer.goto(200,0)
+keysignifier = trtl.Turtle(shape='circle')
+keysignifier.hideturtle()
+keysignifier.penup()
+keysignifier.color('lightgray')
+keysignifier.turtlesize(5)
+keysignifier.goto(200,0)
 
+writer = trtl.Turtle()
+writer.hideturtle()
+writer.penup()
+writer.color('green')
+writer.goto(200,-50)
 
 
 #----------COOKIE RELATED------------
@@ -173,12 +177,22 @@ def list_cap(caplength):
 def check_key(key):
     # Dont need 'global currentletter' as the variable isn't being changed
     if currentletter.lower() == key:
-        draw_letter(key)
+        reset_letter()
 
 def draw_letter(letter):
-    global currentletter
+    keysignifier.showturtle()
+    writer.clear()
+    writer.write(letter, align='center',font=('Arial', 100, 'normal'))
 
-    writer.showturtle()
+def reset_letter():
+    global currentletter
+    index = rand.randint(0,len(letter_list)-1)
+
+    if len(letter_list) != 0:
+        currentletter = letter_list.pop(index)
+        draw_letter(currentletter)
+    else:
+        print('This will call to a function to end the game?')
 
 
 
