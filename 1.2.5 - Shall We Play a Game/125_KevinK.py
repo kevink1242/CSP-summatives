@@ -15,6 +15,8 @@ xcord = -265
 letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
 currentletter = 'E'
 
+lives = 5
+
 # Timer
 totaltime = 10
 counter_interval = 1000
@@ -152,20 +154,6 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
-def draw_crack():
-    painter.setheading(0)
-    painter.pensize(penS)
-    painter.fillcolor('tan')
-    painter.pencolor('tan')
-
-    # The cookie part
-    painter.goto(-200,-125)
-    painter.pendown()
-    painter.begin_fill()
-    painter.circle(150,180)
-    painter.end_fill()
-    painter.penup()
-
 
 #-------FUNCTIONS-------
 def select_shape(x,y): # Responsible for starting the game
@@ -204,9 +192,14 @@ def list_cap(caplength):
             done = True
 
 def check_key(key):
+    global lives
     # Dont need 'global currentletter' as the variable isn't being changed
     if currentletter.lower() == key:
         reset_letter()
+    else:
+        lives_handler()
+
+
 
 def draw_letter(letter):
     keysignifier.showturtle()
@@ -234,6 +227,17 @@ def timer():
         totaltime -= 1
         timekeeper.getscreen().ontimer(timer, counter_interval)
 
+def lives_handler():
+    global lives
+
+    lives -= 1
+    print('lost a life: down to ', lives, ' left')
+    if lives < 1:
+        game_end(False, False)
+    else:
+        print('showcase the mistake on the cookie itself?')
+    
+
 def game_end(win, timerup):
     global letter_list
 
@@ -245,7 +249,9 @@ def game_end(win, timerup):
     if win == True and timerup == False:
         print('winner!')
     elif win == False and timerup == True:
-        print('loser')
+        print('ran out of time')
+    elif win == False and timerup == False:
+        print('cracked the cookie')
     
 
 
