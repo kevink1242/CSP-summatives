@@ -15,6 +15,12 @@ xcord = -265
 letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
 currentletter = 'E'
 
+# Timer
+timer = 10
+counter_interval = 1000
+timer_up = False
+
+
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: the menu screen basically
@@ -37,6 +43,7 @@ painter.hideturtle()
 painter.speed(0)
 penS = 5
 
+# For the actual game part of the program 
 keysignifier = trtl.Turtle(shape='circle')
 keysignifier.hideturtle()
 keysignifier.penup()
@@ -44,6 +51,7 @@ keysignifier.color('lightgray')
 keysignifier.turtlesize(5)
 keysignifier.goto(200,0)
 
+# Writes the words
 writer = trtl.Turtle()
 writer.hideturtle()
 writer.penup()
@@ -139,7 +147,7 @@ def draw_umbrella():
 
 
 #-------FUNCTIONS-------
-def select_shape(x,y):
+def select_shape(x,y): # Responsible for starting the game
     global starting
     cookieselection = rand.randint(1,4)
     starting = False
@@ -188,15 +196,14 @@ def reset_letter():
     global currentletter
     index = rand.randint(0,len(letter_list)-1)
 
-    if len(letter_list) != 0:
+    if len(letter_list) > 1:
         currentletter = letter_list.pop(index)
         draw_letter(currentletter)
     else:
-        print('This will call to a function to end the game?')
+        draw_letter('user won') # later on, call a different function that'll end the game
 
+def timer():
 
-
-# TODO 6: Have letters show up next to the cookie, that will change like in apple avalanche
 
 # TODO 7: Timer
 
@@ -254,7 +261,18 @@ wn.mainloop()
 
 
 
+def countdown():
 
+    global timer, timer_up
+    counter.clear()
+    if timer <= 0:
+        counter.write("Time's Up", font=font_setup)
+        timer_up = True
+        manage_leaderboard()
+    else:
+        counter.write("Timer: " + str(timer), font=font_setup)
+        timer -= 1
+        counter.getscreen().ontimer(countdown, counter_interval)
 
 
 
