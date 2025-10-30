@@ -16,7 +16,7 @@ letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNM')
 currentletter = 'E'
 
 # Timer
-timer = 10
+totaltime = 10
 counter_interval = 1000
 timer_up = False
 
@@ -57,6 +57,16 @@ writer.hideturtle()
 writer.penup()
 writer.color('green')
 writer.goto(200,-50)
+
+# For the timer
+fontsetup = 
+timekeeper = trtl.Turtle()
+timekeeper.hideturtle()
+timekeeper.penup()
+timekeeper.color('black')
+timekeeper.goto(-350,250)
+
+timekeeper.write('timer', font=('Arial',35,'normal'))
 
 
 #----------COOKIE RELATED------------
@@ -203,6 +213,24 @@ def reset_letter():
         draw_letter('user won') # later on, call a different function that'll end the game
 
 def timer():
+    global totaltime, timer_up
+    timekeeper.clear()
+
+    if totaltime <= 0:
+        print('rsdf') # eventually call a function to end the game
+    else:
+        timekeeper.write('Time left: '+ str(totaltime), font=)
+    '''
+    global totaltime, timer_up
+    counter.clear()
+    if totaltime <= 0:
+        counter.write("Time's Up", font=font_setup)
+        timer_up = True
+        manage_leaderboard()
+    else:
+        counter.write("Timer: " + str(totaltime), font=font_setup)
+        totaltime -= 1
+        counter.getscreen().ontimer(countdown, counter_interval)'''
 
 
 # TODO 7: Timer
@@ -258,21 +286,6 @@ wn.mainloop()
 
 
 
-
-
-
-def countdown():
-
-    global timer, timer_up
-    counter.clear()
-    if timer <= 0:
-        counter.write("Time's Up", font=font_setup)
-        timer_up = True
-        manage_leaderboard()
-    else:
-        counter.write("Timer: " + str(timer), font=font_setup)
-        timer -= 1
-        counter.getscreen().ontimer(countdown, counter_interval)
 
 
 
