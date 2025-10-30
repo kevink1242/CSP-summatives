@@ -153,6 +153,19 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
+def draw_crack():
+    painter.setheading(0)
+    painter.pensize(penS)
+    painter.fillcolor('tan')
+    painter.pencolor('tan')
+
+    # The cookie part
+    painter.goto(-200,-125)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(150,180)
+    painter.end_fill()
+    painter.penup()
 
 
 #-------FUNCTIONS-------
@@ -209,37 +222,42 @@ def reset_letter():
         currentletter = letter_list.pop(index)
         draw_letter(currentletter)
     else:
-        draw_letter('user won') # later on, call a different function that'll end the game
+        game_end(True)
 
 def timer():
     global totaltime, timer_up
     timekeeper.clear()
 
     if totaltime <= 0:
-        print('rsdf') # eventually call a function to end the game
+        game_end(False)
     else:
         timekeeper.write('Time left: '+ str(totaltime), font=fontsetup)
         totaltime -= 1
         timekeeper.getscreen().ontimer(timer, counter_interval)
-    '''
-    global totaltime, timer_up
-    counter.clear()
-    if totaltime <= 0:
-        counter.write("Time's Up", font=font_setup)
-        timer_up = True
-        manage_leaderboard()
-    else:
-        counter.write("Timer: " + str(totaltime), font=font_setup)
-        totaltime -= 1
-        counter.getscreen().ontimer(countdown, counter_interval)'''
 
+
+def game_end(win):
+    if win:
+        print('winner!')
+    else:
+        print('loser')
+    
 
 
 # TODO 7.5.1: Create a losing end game function (timer & crack cookie)
 # TODO 7.5.2: Create a winning end game function (completing the cookie)
+
+
 # TODO 8: removing the point system: lives system instead
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
 
+# TODO ???: SCORE SYSTEM CAN BE ACCULMATED BY THE AMOUNT OF KEYS PRESSED
+
+'''
+pressed right key: +10
+pressed wrong key: -5
+final score multiplied by amount of time left
+'''
 
 
 #----------GAME-----------
