@@ -18,7 +18,7 @@ currentletter = 'E'
 lives = 3
 
 # Timer
-totaltime = 10
+totaltime = 15
 counter_interval = 1000
 
 
@@ -70,7 +70,7 @@ timekeeper = trtl.Turtle()
 timekeeper.hideturtle()
 timekeeper.penup()
 timekeeper.color('red')
-timekeeper.goto(-100,-200)
+timekeeper.goto(0,-200)
 
 
 #----------COOKIE RELATED------------
@@ -158,7 +158,29 @@ def draw_umbrella():
     painter.circle(100,180)
     painter.penup()
 
-def draw_cookiecrack():
+def draw_crack(life):
+    if life >= 2:
+        painter.goto(-200,-125)
+        for i in range(5):
+            painter.pendown()
+            painter.setheading(45)
+            painter.forward(10)
+            painter.setheading(90)
+            painter.forward(15)
+            painter.penup()
+            painterxposition = painter.xcor()
+            painteryposition = painter.ycor()
+    elif life < 2:
+        for i in range(4):
+            painter.pendown()
+            painter.setheading(45)
+            painter.forward(5)
+            painter.setheading(90)
+            painter.forward(20)
+            painter.penup()
+    
+
+def draw_lose():
     painter.clear()
     painter.setheading(0)
     painter.goto(-200, -125)
@@ -227,13 +249,13 @@ def reset_letter():
 
 def timer():
     global totaltime
-    timekeeper.clear()
 
     if gamefin == False:
         if totaltime <= 0:
             game_end(False, True) # Winning the game is false, but the time ran out initiating a game end
         else:
-            timekeeper.write('Time left: '+ str(totaltime), font=fontsetup)
+            timekeeper.clear()
+            timekeeper.write(str(totaltime) + ' seconds left',align='center', font=fontsetup)
             totaltime -= 1
             timekeeper.getscreen().ontimer(timer, counter_interval)
 
@@ -245,7 +267,7 @@ def lives_handler():
     if lives < 1:
         game_end(False, False) # Both winning the game and the timer being up is false
     else:
-        print('showcase the mistake on the cookie itself?')
+        draw_crack(lives)
     
 def game_end(win, timerup):
     global letter_list, gamefin
@@ -253,19 +275,19 @@ def game_end(win, timerup):
     gamefin = True
 
     letter_list = list()
-    timekeeper.clear()
     writer.clear()
     keysignifier.hideturtle()
 
     if win == True and timerup == False: # Won the game fully
         print('winner!')
     elif win == False and timerup == True: # Ran out of time
-        timekeeper.write('OUT OF TIME', font=fontsetup)
-        draw_cookiecrack()
+        timekeeper.clear()
+        timekeeper.write('OUT OF TIME', align='center',font=fontsetup)
+        draw_lose()
         
     elif win == False and timerup == False: # Ran out of lives
         print('cracked the cookie')
-        draw_cookiecrack()
+        draw_lose()
 
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
 
@@ -275,6 +297,7 @@ def game_end(win, timerup):
 pressed right key: +10
 pressed wrong key: -5
 final score multiplied by amount of time left
+type of cookie = a bonus multiplier
 '''
 
 
