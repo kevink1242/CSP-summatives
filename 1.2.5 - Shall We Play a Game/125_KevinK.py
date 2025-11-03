@@ -49,6 +49,15 @@ painter.hideturtle()
 painter.speed(0)
 penS = 5
 
+# Specifically to draw the cracks as the user loses lives
+painter2 = trtl.Turtle()
+painter2.penup()
+painter2.hideturtle()
+painter2.speed(0)
+painter2.pensize(penS)
+painter2.pencolor('black')
+painter2.fillcolor('tan')
+
 # For the actual game part of the program 
 keysignifier = trtl.Turtle(shape='circle')
 keysignifier.hideturtle()
@@ -95,6 +104,7 @@ def draw_circle():
     painter.pendown()
     painter.circle(100)
     painter.penup()
+    painter.goto(-200,-85)
 
 def draw_triangle():
     painter.setheading(0)
@@ -142,6 +152,7 @@ def draw_star():
         painter.right(144)
         painter.forward(75)
         painter.left(72)
+    painter.penup()
 
 def draw_umbrella():
     painter.setheading(0)
@@ -181,37 +192,50 @@ def draw_umbrella():
     painter.pendown()
     painter.forward(120)
     painter.circle(-20,180)
-
-
+    painter.penup()
 
 def draw_crack(life):
     if life >= 2:
-        painter.goto(-200,-125)
+        painter2.goto(-200,-125)
         for i in range(5):
-            painter.pendown()
-            painter.setheading(45)
-            painter.forward(10)
-            painter.setheading(90)
-            painter.forward(15)
-            painter.penup()
-            painterxposition = painter.xcor()
-            painteryposition = painter.ycor()
+            painter2.pendown()
+            painter2.setheading(45)
+            painter2.forward(10)
+            painter2.setheading(90)
+            painter2.forward(15)
+            painter2.penup()
     elif life < 2:
         for i in range(4):
-            painter.pendown()
-            painter.setheading(45)
-            painter.forward(5)
-            painter.setheading(90)
-            painter.forward(20)
-            painter.penup()
+            painter2.pendown()
+            painter2.setheading(45)
+            painter2.forward(5)
+            painter2.setheading(90)
+            painter2.forward(20)
+            painter2.penup()
     
 def draw_lose():
     painter.clear()
-    painter.setheading(0)
-    painter.goto(-200, -125)
+    
+    for i in range(6):
+            painter2.pendown()
+            painter2.setheading(45)
+            painter2.forward(7)
+            painter2.setheading(90)
+            painter2.forward(7)
+            painter2.penup()
+    painter2.setheading(0)
+    painter2.goto(-200, -125)
+    painter2.pendown()
+    painter2.circle(150,147)
+    painter2.end_fill()
+    painter2.penup()
 
-    painter.pendown()
-    painter.circle(150,180)
+#----------OUTLINING----------
+def outline_circle():
+   painter.pencolor('chartreuse')
+   painter.pendown()
+   painter.circle(100,36)
+
 
 #-------FUNCTIONS-------
 def select_shape(x,y): # Responsible for starting the game
@@ -253,12 +277,12 @@ def check_key(key):
     # Dont need 'global currentletter' as the variable isn't being changed
     if currentletter.lower() == key:
         reset_letter()
+        outline_handler(userselection)
     elif currentletter.lower() != key:
         if lives > 0:
             lives_handler()
 
 def draw_letter(letter):
-    keysignifier.showturtle()
     writer.clear()
     writer.write(letter, align='center',font=('Arial', 100, 'normal'))
 
@@ -293,7 +317,21 @@ def lives_handler():
         game_end(False, False) # Both winning the game and the timer being up is false
     else:
         draw_crack(lives)
+
+def outline_handler(cookie):
+    if cookie == 1:
+        print('nun')
+    elif cookie == 2:
+        if len(letter_list) % 7 == 0:
+            outline_circle()
+    elif cookie == 3:
+        print('star outliner')
+    elif cookie == 4:
+        print('umbrella outliner: HARDEST')
+
     
+
+
 def game_end(win, timerup):
     global letter_list, gamefin
     
@@ -343,6 +381,10 @@ userselection = select_shape(0,0)
 for d in placeholder_list:
     d.hideturtle()
     
+# Misc.
+keysignifier.showturtle()
+
+# Activating functions
 draw_shape(userselection)
 draw_letter(currentletter)
 timer()
