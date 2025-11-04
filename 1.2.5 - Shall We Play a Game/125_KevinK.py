@@ -7,7 +7,6 @@ wn = trtl.Screen()
 wn.setup(width=750, height=600)
 wn.cv._rootwindow.resizable(False, False)
 
-wn.listen()
 
 #------VARIABLES-----
 xcord = -265
@@ -29,6 +28,15 @@ gamefin = False # Variable for if the game is finished
 # Essentially only purpose is for the timer. Fixed the issue of the timer counting down even after finishing the game
 
 
+# Win screen
+
+username = trtl.textinput('Player name','What is your name?')
+
+playeridentity = rand.randint(1,255)
+if playeridentity == 255:
+    playeridentity += 201 # Gives the chance to be player 456
+
+score = 0
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: the menu screen basically
@@ -84,7 +92,7 @@ timekeeper.penup()
 timekeeper.color('red')
 timekeeper.goto(0,-200)
 
-
+winfont = ('Arial',25,'normal')
 #----------COOKIE RELATED------------
 def draw_circle():
     painter.setheading(0)
@@ -250,7 +258,7 @@ def outline_triangle(side):
         painter.forward(9.5)
     if side == 3:
         painter.setheading(300)
-        painter.forward(7)
+        painter.forward(5)
 
 
 #-------FUNCTIONS-------
@@ -290,18 +298,18 @@ def list_cap(caplength):
             donecap = True
 
 def check_key(key):
-    global lettercount
+    global lettercount, score
     # Dont need 'global currentletter' as the variable isn't being changed
     if currentletter.lower() == key:
         outline_handler(userselection)
         lettercount += 1
 
         reset_letter()
-        print('length of list: ',len(letter_list))
-        print('lettercount: ', lettercount)
+        score += 5
     elif currentletter.lower() != key:
         if lives > 0:
             lives_handler()
+        score -= 5
 
 def draw_letter(letter):
     keysignifier.showturtle()
@@ -373,7 +381,7 @@ def game_end(win, timerup):
     keysignifier.hideturtle()
 
     if win == True and timerup == False: # Won the game fully
-        print('winner!')
+        win_screen()
     elif win == False and timerup == True: # Ran out of time
         timekeeper.clear()
         timekeeper.write('OUT OF TIME', align='center',font=fontsetup)
@@ -383,6 +391,26 @@ def game_end(win, timerup):
         timekeeper.clear()
         draw_lose()
 
+def win_screen():
+    global score
+
+    writer.pencolor('black')
+
+    writer.goto(150,120)
+    writer.write('Congrats '+username+', Player '+str(playeridentity), align='center',font=winfont)
+
+    # All of the different multipliers for the final score
+    shapemultipler = userselection*1000
+    timemultipler = totaltime*100
+    if lives >= 1:
+        lifemultipler = lives*10
+    else:
+        lifemultipler = 0
+
+    score = score+shapemultipler+timemultipler+lifemultipler
+    #-----------------------
+    writer.goto(150,80)
+    writer.write('Your score was: '+str(score),align='center',font=winfont)
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
 
 # TODO ???: SCORE SYSTEM CAN BE ACCULMATED BY THE AMOUNT OF KEYS PRESSED
@@ -418,6 +446,7 @@ draw_shape(userselection)
 draw_letter(currentletter)
 timer()
 
+wn.listen() # Had to be moved down here because trtl.textinput was messing with the onkeypress
 
 for letter in 'qwertyuiopasdfghjklzxcvbnm':
     wn.onkeypress(lambda l=letter: check_key(l), letter)
