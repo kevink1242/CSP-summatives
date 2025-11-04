@@ -32,9 +32,9 @@ gamefin = False # Variable for if the game is finished
 
 username = trtl.textinput('Player name','What is your name?')
 
-playeridentity = rand.randint(1,255)
-if playeridentity == 255:
-    playeridentity += 201 # Gives the chance to be player 456
+useridentity = rand.randint(1,255)
+if useridentity == 255:
+    useridentity += 201 # Gives the small chance to be player 456
 
 score = 0
 
@@ -92,7 +92,6 @@ timekeeper.penup()
 timekeeper.color('red')
 timekeeper.goto(0,-200)
 
-winfont = ('Arial',25,'normal')
 #----------COOKIE RELATED------------
 def draw_circle():
     painter.setheading(0)
@@ -305,7 +304,7 @@ def check_key(key):
         lettercount += 1
 
         reset_letter()
-        score += 5
+        score += 10
     elif currentletter.lower() != key:
         if lives > 0:
             lives_handler()
@@ -368,9 +367,6 @@ def outline_handler(cookie):
     elif cookie == 4:
         print('umbrella outliner: HARDEST')
 
-    
-
-
 def game_end(win, timerup):
     global letter_list, gamefin
     
@@ -390,27 +386,50 @@ def game_end(win, timerup):
     elif win == False and timerup == False: # Ran out of lives
         timekeeper.clear()
         draw_lose()
+    
+
+    shapemultipler = userselection*1000
+    timemultipler = totaltime*100
+    if lives >= 1:
+        lifemultipler = lives*50
+    else:
+        lifemultipler = 0
+
+    score = score+shapemultipler+timemultipler+lifemultipler
 
 def win_screen():
     global score
 
     writer.pencolor('black')
-
+    # Address the user
     writer.goto(150,120)
-    writer.write('Congrats '+username+', Player '+str(playeridentity), align='center',font=winfont)
+    writer.write('Congrats '+username+', Player '+str(useridentity), align='center',font=('Arial',25,'normal'))
+    #-------------------------- Setting final score
+    shapemultiplier = score*(userselection*1000)
+    timemultiplier = totaltime*10
+    lifemultiplier = lives*5
 
-    # All of the different multipliers for the final score
-    shapemultipler = userselection*1000
-    timemultipler = totaltime*100
-    if lives >= 1:
-        lifemultipler = lives*10
-    else:
-        lifemultipler = 0
-
-    score = score+shapemultipler+timemultipler+lifemultipler
-    #-----------------------
+    finalscore = score+shapemultiplier+timemultiplier+lifemultiplier
+    #-------------------------
     writer.goto(150,80)
-    writer.write('Your score was: '+str(score),align='center',font=winfont)
+    writer.write('Your score was: '+str(score)+'!',align='center',font=('Arial',23,'normal'))
+
+    # Address the different multipliers to the user
+    writer.pencolor('firebrick4')
+    writer.goto(150,70)
+    writer.write('Initial score: '+score, align='center',font=('Arial',21,'normal'))
+
+    writer.goto(150,60)
+    if userselection == 1:
+        writer.write('Triangle shape x1000', font=('Arial',21,'normal'))
+    elif userselection == 2:
+        writer.write('Circle shape x2000', font=('Arial',21,'normal'))
+    elif userselection == 3:
+        writer.write('Star shape x3000', font=('Arial',21,'normal'))
+    elif userselection == 4:
+        writer.write('Umbrella shape x4000', font=('Arial',21,'normal'))
+    
+
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
 
 # TODO ???: SCORE SYSTEM CAN BE ACCULMATED BY THE AMOUNT OF KEYS PRESSED
