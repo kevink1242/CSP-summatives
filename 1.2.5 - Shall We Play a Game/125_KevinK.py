@@ -226,20 +226,17 @@ def draw_crack(life):
     
 def draw_lose():
     painter.clear()
-    
-    for i in range(6):
-            painter2.pendown()
-            painter2.setheading(45)
-            painter2.forward(7)
-            painter2.setheading(90)
-            painter2.forward(7)
-            painter2.penup()
+    painter2.clear()
+
     painter2.setheading(0)
     painter2.goto(-200, -125)
     painter2.pendown()
     painter2.circle(150,147)
-    painter2.end_fill()
     painter2.penup()
+    painter2.setheading(180)
+    painter2.goto(-220,-125)
+    painter2.pendown()
+    painter2.circle(-150,210)
 
 #----------OUTLINING----------
 def outline_circle():
@@ -382,8 +379,10 @@ def game_end(win, timerup):
     elif win == False and timerup == True: # Ran out of time
         timekeeper.write('OUT OF TIME', align='center',font=fontsetup)
         draw_lose()
-        
     elif win == False and timerup == False: # Ran out of lives
+        writer.pencolor('red')
+        writer.goto(150,0)
+        writer.write('YOU LOST',align='center',font=fontsetup)
         draw_lose()
 
 def win_screen():                                                       
