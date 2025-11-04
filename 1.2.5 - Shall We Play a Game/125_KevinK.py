@@ -16,6 +16,8 @@ xcord = -265
 letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNMWERTYUIOPASDFGHJKLZXCVBQWERTYUIOPASDFGHJKLZXCVBNMWERTYUIOPASDFGH') # = 90 letters
 currentletter = 'E'
 
+lettercount = 0 # Handles switching sides for each shapes outline
+
 lives = 3
 
 # Timer
@@ -127,6 +129,8 @@ def draw_triangle():
     painter.setheading(60)
     painter.circle(100,360,3)
     painter.penup()
+    painter.goto(-110,-30)
+    painter.setheading(180)
 
 def draw_star():
     painter.setheading(0)
@@ -234,7 +238,19 @@ def draw_lose():
 def outline_circle():
    painter.pencolor('chartreuse')
    painter.pendown()
-   painter.circle(100,36)
+   painter.circle(100,6)
+
+def outline_triangle(side):
+    if side == 1:
+        painter.pencolor('chartreuse')
+        painter.pendown()
+        painter.forward(9.5)
+    if side == 2:
+        painter.setheading(60)
+        painter.forward(9.5)
+    if side == 3:
+        painter.setheading(300)
+        painter.forward(7)
 
 
 #-------FUNCTIONS-------
@@ -253,7 +269,7 @@ def draw_shape(num):
         cap = 55
     elif num == 2:
         draw_circle()
-        cap = 65
+        cap = 60
     elif num == 3:
         draw_star()
         cap = 80
@@ -274,15 +290,21 @@ def list_cap(caplength):
             donecap = True
 
 def check_key(key):
+    global lettercount
     # Dont need 'global currentletter' as the variable isn't being changed
     if currentletter.lower() == key:
-        reset_letter()
         outline_handler(userselection)
+        lettercount += 1
+
+        reset_letter()
+        print('length of list: ',len(letter_list))
+        print('lettercount: ', lettercount)
     elif currentletter.lower() != key:
         if lives > 0:
             lives_handler()
 
 def draw_letter(letter):
+    keysignifier.showturtle()
     writer.clear()
     writer.write(letter, align='center',font=('Arial', 100, 'normal'))
 
@@ -319,11 +341,20 @@ def lives_handler():
         draw_crack(lives)
 
 def outline_handler(cookie):
-    if cookie == 1:
-        print('nun')
-    elif cookie == 2:
-        if len(letter_list) % 7 == 0:
-            outline_circle()
+    global lettercount
+    if cookie == 1: # Triangle cookie
+        triangleside = 1
+        if lettercount == 18:
+            triangleside = 2
+            outline_triangle(triangleside)
+        elif lettercount == 36:
+            triangleside = 3
+            outline_triangle(triangleside)
+        else:
+            outline_triangle(triangleside)
+
+    elif cookie == 2: # Circle cookie
+        outline_circle()
     elif cookie == 3:
         print('star outliner')
     elif cookie == 4:
@@ -381,8 +412,6 @@ userselection = select_shape(0,0)
 for d in placeholder_list:
     d.hideturtle()
     
-# Misc.
-keysignifier.showturtle()
 
 # Activating functions
 draw_shape(userselection)
