@@ -7,11 +7,9 @@ wn = trtl.Screen()
 wn.setup(width=750, height=600)
 wn.cv._rootwindow.resizable(False, False)
 
-
 #------VARIABLES-----
 xcord = -265
 
-#letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNMWERTYUIOPASDFGHJKLZXCVBQWERTYUIOPASDFGHJKLZXCVBNMWERTYUIOPASDFGHJKLZXCNMEE') # = 100 letters
 letter_list = list('QWERTYUIOPASDFGHJKLZXCVBNMWERTYUIOPASDFGHJKLZXCVBQWERTYUIOPASDFGHJKLZXCVBNMWERTYUIOPASDFGH') # = 90 letters
 currentletter = 'E'
 
@@ -40,7 +38,6 @@ score = 0
 
 #-------TURTLES--------
 # the turtles for selecting a shape to cut out: the menu screen basically
-
 placeholder_list = []
 for s in range(4):
     placeholdercookie = trtl.Turtle(shape='circle')
@@ -66,7 +63,6 @@ painter2.hideturtle()
 painter2.speed(0)
 painter2.pensize(penS)
 painter2.pencolor('black')
-painter2.fillcolor('tan')
 
 # For the actual game part of the program 
 keysignifier = trtl.Turtle(shape='circle')
@@ -91,6 +87,13 @@ timekeeper.hideturtle()
 timekeeper.penup()
 timekeeper.color('red')
 timekeeper.goto(0,-200)
+
+# Soley for the 'menu screen' giving instructions
+instructioner = trtl.Turtle()
+instructioner.penup()
+instructioner.hideturtle()
+instructioner.color('black')
+instructioner.goto(0,150)
 
 #----------COOKIE RELATED------------
 def draw_circle():
@@ -266,8 +269,9 @@ def select_shape(x,y): # Responsible for starting the game
     return cookieselection
 
 def draw_shape(num):
-    # The number that'll set how many letters are to be pressed for each shape: removing any letters after the number
-    cap = 0
+    instructioner.clear()
+
+    cap = 0 # The number that'll set how many letters are to be pressed for each shape: removing any letters after the number
     if num == 1:
         draw_triangle()
         cap = 55
@@ -377,12 +381,15 @@ def game_end(win, timerup):
     if win == True and timerup == False: # Won the game fully
         win_screen()
     elif win == False and timerup == True: # Ran out of time
+        writer.pencolor('red')
+        writer.goto(150,0)
+        writer.write('PLAYER '+str(useridentity)+' HAS LOST',align='center',font=fontsetup)
         timekeeper.write('OUT OF TIME', align='center',font=fontsetup)
         draw_lose()
     elif win == False and timerup == False: # Ran out of lives
         writer.pencolor('red')
         writer.goto(150,0)
-        writer.write('YOU LOST',align='center',font=fontsetup)
+        writer.write('PLAYER '+str(useridentity)+' HAS LOST',align='center',font=fontsetup)
         draw_lose()
 
 def win_screen():                                                       
@@ -429,6 +436,12 @@ def win_screen():
 # Pauses the program from continuing and assigning a value to 'userselection'
 starting = True # Variable is set to false in the select_shape function
 
+# Writing 'instructions' on the screen for clarity
+instructioner.write('Welcome Player '+str(useridentity)+', please select a cookie',align='center',font=fontsetup)
+instructioner.goto(0,-150)
+instructioner.write('Each cookie will have a different shape,', align='center',font=('Arial',20,'normal'))
+instructioner.goto(0,-170)
+instructioner.write('requiring you to click an amount of keys ranging in difficulty',align='center',font=('Arial',20,'normal'))
 while starting:
     placeholder_list[0].onclick(select_shape)
     placeholder_list[1].onclick(select_shape)
@@ -467,18 +480,3 @@ for letter in 'qwertyuiopasdfghjklzxcvbnm':
 
 
 wn.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-# TODO OPTIONAL (10): Turtle tracing the shape of the cookie as keys are being pressed (OPTIONAL)
-
-# TODO 11: Leaderboard (Create a txt file)
