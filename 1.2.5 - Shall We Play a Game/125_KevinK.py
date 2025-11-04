@@ -76,7 +76,7 @@ keysignifier.color('lightgray')
 keysignifier.turtlesize(5)
 keysignifier.goto(200,0)
 
-# Writes the words
+# Writes the words/letters
 writer = trtl.Turtle()
 writer.hideturtle()
 writer.penup()
@@ -375,72 +375,55 @@ def game_end(win, timerup):
     letter_list = list()
     writer.clear()
     keysignifier.hideturtle()
+    timekeeper.clear()
 
     if win == True and timerup == False: # Won the game fully
         win_screen()
     elif win == False and timerup == True: # Ran out of time
-        timekeeper.clear()
         timekeeper.write('OUT OF TIME', align='center',font=fontsetup)
         draw_lose()
         
     elif win == False and timerup == False: # Ran out of lives
-        timekeeper.clear()
         draw_lose()
-    
 
-    shapemultipler = userselection*1000
-    timemultipler = totaltime*100
-    if lives >= 1:
-        lifemultipler = lives*50
-    else:
-        lifemultipler = 0
-
-    score = score+shapemultipler+timemultipler+lifemultipler
-
-def win_screen():
-    global score
-
+def win_screen():                                                       
     writer.pencolor('black')
     # Address the user
     writer.goto(150,120)
     writer.write('Congrats '+username+', Player '+str(useridentity), align='center',font=('Arial',25,'normal'))
     #-------------------------- Setting final score
-    shapemultiplier = score*(userselection*1000)
+    shapemultiplier = userselection*1000
     timemultiplier = totaltime*10
     lifemultiplier = lives*5
 
     finalscore = score+shapemultiplier+timemultiplier+lifemultiplier
     #-------------------------
-    writer.goto(150,80)
-    writer.write('Your score was: '+str(score)+'!',align='center',font=('Arial',23,'normal'))
+    writer.goto(150,90)
+    writer.write('Your score was: '+str(finalscore)+'!',align='center',font=('Arial',23,'normal'))
 
     # Address the different multipliers to the user
     writer.pencolor('firebrick4')
-    writer.goto(150,70)
-    writer.write('Initial score: '+score, align='center',font=('Arial',21,'normal'))
+    writer.goto(150,30)
+    writer.write('Initial score: '+str(score), align='center',font=('Arial',22,'normal'))
 
-    writer.goto(150,60)
+    writer.goto(150,0)
     if userselection == 1:
-        writer.write('Triangle shape x1000', font=('Arial',21,'normal'))
+        writer.write('Triangle shape x1000', align='center',font=('Arial',22,'normal'))
     elif userselection == 2:
-        writer.write('Circle shape x2000', font=('Arial',21,'normal'))
+        writer.write('Circle shape x2000', align='center',font=('Arial',22,'normal'))
     elif userselection == 3:
-        writer.write('Star shape x3000', font=('Arial',21,'normal'))
+        writer.write('Star shape x3000', align='center',font=('Arial',22,'normal'))
     elif userselection == 4:
-        writer.write('Umbrella shape x4000', font=('Arial',21,'normal'))
+        writer.write('Umbrella shape x4000', align='center',font=('Arial',22,'normal'))
+    
+    writer.goto(150,-30)
+    writer.write(str(totaltime)+' seconds left x10',align='center',font=('Arial',22,'normal'))
+
+    writer.goto(150,-60)
+    writer.write(str(lives)+' lives left x5',align='center',font=('Arial',22,'normal'))
     
 
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
-
-# TODO ???: SCORE SYSTEM CAN BE ACCULMATED BY THE AMOUNT OF KEYS PRESSED
-
-'''
-pressed right key: +10
-pressed wrong key: -5
-final score multiplied by amount of time left
-type of cookie = a bonus multiplier
-'''
-
 
 #----------GAME-----------
 
@@ -474,8 +457,6 @@ for letter in 'qwertyuiopasdfghjklzxcvbnm':
 
 
 
-#--------SCREEN--------
-# TODO 9: Win screen, showing the cookie being cracked? Displaying points and name
 
 
 
