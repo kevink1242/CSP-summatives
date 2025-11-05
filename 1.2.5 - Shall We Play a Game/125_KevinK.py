@@ -27,12 +27,20 @@ gamefin = False # Variable for if the game is finished
 
 
 # Win screen
-
+maxchar = 12
 username = trtl.textinput('Player name','What is your name?')
+username = username[:maxchar] # Limits the amount of characters that can be used
 
 useridentity = rand.randint(1,255)
 if useridentity == 255:
     useridentity += 201 # Gives the small chance to be player 456
+elif useridentity < 100:
+    if useridentity < 10:
+        useridentity = '00'+str(useridentity) # adds a 0 in front of the number to make the number look more accurate to squid games
+    else:
+        useridentity = '0'+str(useridentity) # likewise line 39
+
+    
 
 score = 0
 
@@ -57,12 +65,12 @@ painter.speed(0)
 penS = 5
 
 # Specifically to draw the cracks as the user loses lives
-painter2 = trtl.Turtle()
-painter2.penup()
-painter2.hideturtle()
-painter2.speed(0)
-painter2.pensize(penS)
-painter2.pencolor('black')
+crackpainter = trtl.Turtle()
+crackpainter.penup()
+crackpainter.hideturtle()
+crackpainter.speed(0)
+crackpainter.pensize(penS)
+crackpainter.pencolor('black')
 
 # For the actual game part of the program 
 keysignifier = trtl.Turtle(shape='circle')
@@ -167,6 +175,8 @@ def draw_star():
         painter.forward(75)
         painter.left(72)
     painter.penup()
+    painter.setheading(0)
+    painter.goto(-180,50)
 
 def draw_umbrella():
     painter.setheading(0)
@@ -210,36 +220,36 @@ def draw_umbrella():
 
 def draw_crack(life):
     if life >= 2:
-        painter2.goto(-200,-125)
+        crackpainter.goto(-200,-125)
         for i in range(5):
-            painter2.pendown()
-            painter2.setheading(45)
-            painter2.forward(10)
-            painter2.setheading(90)
-            painter2.forward(15)
-            painter2.penup()
+            crackpainter.pendown()
+            crackpainter.setheading(45)
+            crackpainter.forward(10)
+            crackpainter.setheading(90)
+            crackpainter.forward(15)
+            crackpainter.penup()
     elif life < 2:
         for i in range(4):
-            painter2.pendown()
-            painter2.setheading(45)
-            painter2.forward(5)
-            painter2.setheading(90)
-            painter2.forward(20)
-            painter2.penup()
+            crackpainter.pendown()
+            crackpainter.setheading(45)
+            crackpainter.forward(5)
+            crackpainter.setheading(90)
+            crackpainter.forward(20)
+            crackpainter.penup()
     
 def draw_lose():
     painter.clear()
-    painter2.clear()
+    crackpainter.clear()
 
-    painter2.setheading(0)
-    painter2.goto(-200, -125)
-    painter2.pendown()
-    painter2.circle(150,147)
-    painter2.penup()
-    painter2.setheading(180)
-    painter2.goto(-220,-125)
-    painter2.pendown()
-    painter2.circle(-150,210)
+    crackpainter.setheading(0)
+    crackpainter.goto(-200, -125)
+    crackpainter.pendown()
+    crackpainter.circle(150,147)
+    crackpainter.penup()
+    crackpainter.setheading(180)
+    crackpainter.goto(-220,-125)
+    crackpainter.pendown()
+    crackpainter.circle(-150,210)
 
 #----------OUTLINING----------
 def outline_circle():
@@ -257,7 +267,23 @@ def outline_triangle(side):
         painter.forward(9.5)
     if side == 3:
         painter.setheading(300)
-        painter.forward(5)
+        painter.forward(3.5)
+
+def outline_star(side):
+    painter.pencolor('chartreuse')
+    painter.pendown()
+    if side == 1:
+        painter.forward(9)
+    elif side == 2:
+        painter.setheading(213)
+        painter.forward(9)
+    elif side == 3:
+        painter.setheading(287)
+        painter.forward(9)
+    elif side == 4:
+        painter.setheading()
+        painter.forward(9)
+
 
 
 #-------FUNCTIONS-------
@@ -349,7 +375,6 @@ def lives_handler():
         draw_crack(lives)
 
 def outline_handler(cookie):
-    global lettercount
     if cookie == 1: # Triangle cookie
         triangleside = 1
         if lettercount == 18:
@@ -363,8 +388,35 @@ def outline_handler(cookie):
 
     elif cookie == 2: # Circle cookie
         outline_circle()
-    elif cookie == 3:
-        print('star outliner')
+
+    elif cookie == 3: # Star cookie
+        starside = 1
+        if lettercount == 8:
+            starside = 2
+            outline_star(starside)
+        elif lettercount == 16:
+            starside = 3
+            outline_star(starside)
+        elif lettercount == 24:
+            starside = 4
+            outline_star(starside)
+        elif lettercount == 32:
+            starside = 5
+            outline_star(starside)
+        elif lettercount == 40:
+            starside = 6
+            outline_star(starside)
+        elif lettercount == 48:
+            starside = 7
+            outline_star(starside)
+        elif lettercount == 56:
+            starside = 8
+            outline_star(starside) 
+        elif lettercount == 64:
+            starside = 9
+            outline_star(starside) 
+        else:
+            outline_star(starside)
     elif cookie == 4:
         print('umbrella outliner: HARDEST')
 
@@ -382,13 +434,13 @@ def game_end(win, timerup):
         win_screen()
     elif win == False and timerup == True: # Ran out of time
         writer.pencolor('red')
-        writer.goto(150,0)
+        writer.goto(160,0)
         writer.write('PLAYER '+str(useridentity)+' HAS LOST',align='center',font=fontsetup)
         timekeeper.write('OUT OF TIME', align='center',font=fontsetup)
         draw_lose()
     elif win == False and timerup == False: # Ran out of lives
         writer.pencolor('red')
-        writer.goto(150,0)
+        writer.goto(160,0)
         writer.write('PLAYER '+str(useridentity)+' HAS LOST',align='center',font=fontsetup)
         draw_lose()
 
@@ -414,19 +466,19 @@ def win_screen():
 
     writer.goto(150,0)
     if userselection == 1:
-        writer.write('Triangle shape x1000', align='center',font=('Arial',22,'normal'))
+        writer.write('Triangle shape +1000', align='center',font=('Arial',22,'normal'))
     elif userselection == 2:
-        writer.write('Circle shape x2000', align='center',font=('Arial',22,'normal'))
+        writer.write('Circle shape +2000', align='center',font=('Arial',22,'normal'))
     elif userselection == 3:
-        writer.write('Star shape x3000', align='center',font=('Arial',22,'normal'))
+        writer.write('Star shape +3000', align='center',font=('Arial',22,'normal'))
     elif userselection == 4:
-        writer.write('Umbrella shape x4000', align='center',font=('Arial',22,'normal'))
+        writer.write('Umbrella shape +4000', align='center',font=('Arial',22,'normal'))
     
     writer.goto(150,-30)
-    writer.write(str(totaltime)+' seconds left x10',align='center',font=('Arial',22,'normal'))
+    writer.write('+'+str(totaltime)+' seconds left x10',align='center',font=('Arial',22,'normal'))
 
     writer.goto(150,-60)
-    writer.write(str(lives)+' lives left x5',align='center',font=('Arial',22,'normal'))
+    writer.write('+'+str(lives)+' lives left x5',align='center',font=('Arial',22,'normal'))
     
 
 # TODO 9: make the lines on the cookie line up matching up with the amount of keys pressed
