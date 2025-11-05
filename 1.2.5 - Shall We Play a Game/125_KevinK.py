@@ -279,9 +279,21 @@ def outline_star(side):
         painter.forward(9)
     elif side == 3:
         painter.setheading(287)
-        painter.forward(9)
+        painter.forward(11)
     elif side == 4:
-        painter.setheading()
+        painter.setheading(149)
+        painter.forward(9)
+    elif side == 5:
+        painter.setheading(220)
+        painter.forward(9)
+    elif side == 6:
+        painter.setheading(70)
+        painter.forward(9)
+    elif side == 7:
+        painter.setheading(144)
+        painter.forward(9)
+    elif side == 8:
+        painter.setheading(0)
         painter.forward(9)
 
 
@@ -414,7 +426,7 @@ def outline_handler(cookie):
             outline_star(starside) 
         elif lettercount == 64:
             starside = 9
-            outline_star(starside) 
+            outline_star(starside)
         else:
             outline_star(starside)
     elif cookie == 4:
