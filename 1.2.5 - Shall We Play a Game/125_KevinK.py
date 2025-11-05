@@ -18,7 +18,7 @@ lettercount = 0 # Handles switching sides for each shapes outline
 lives = 3
 
 # Timer
-totaltime = 50
+totaltime = 100000
 counter_interval = 1000
 
 
@@ -291,9 +291,15 @@ def outline_star(side):
         painter.forward(9)
     elif side == 7:
         painter.setheading(144)
-        painter.forward(9)
+        painter.forward(15)
     elif side == 8:
         painter.setheading(0)
+        painter.forward(9)
+    elif side == 9:
+        painter.setheading(74)
+        painter.forward(9)
+    elif side == 10:
+        painter.setheading(293)
         painter.forward(9)
 
 
@@ -426,6 +432,9 @@ def outline_handler(cookie):
             outline_star(starside) 
         elif lettercount == 64:
             starside = 9
+            outline_star(starside)
+        elif lettercount > 71:
+            starside = 10
             outline_star(starside)
         else:
             outline_star(starside)
