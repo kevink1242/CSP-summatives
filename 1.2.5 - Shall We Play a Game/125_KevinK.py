@@ -18,7 +18,7 @@ lettercount = 0 # Handles switching sides for each shapes outline
 lives = 3
 
 # Timer
-totaltime = 100000
+totaltime = 50
 counter_interval = 1000
 
 
@@ -439,7 +439,7 @@ def outline_handler(cookie):
         else:
             outline_star(starside)
     elif cookie == 4:
-        print('umbrella outliner: HARDEST')
+        print('umbrella outline')
 
 def game_end(win, timerup):
     global letter_list, gamefin
@@ -515,6 +515,7 @@ instructioner.goto(0,-150)
 instructioner.write('Each cookie will have a different shape,', align='center',font=('Arial',20,'normal'))
 instructioner.goto(0,-170)
 instructioner.write('requiring you to click an amount of keys ranging in difficulty',align='center',font=('Arial',20,'normal'))
+
 while starting:
     placeholder_list[0].onclick(select_shape)
     placeholder_list[1].onclick(select_shape)
