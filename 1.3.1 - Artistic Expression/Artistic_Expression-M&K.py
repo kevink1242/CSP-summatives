@@ -1,8 +1,31 @@
-# TODO 1: Import the envelope images
+import turtle as trtl
+
+
+#----SCREEN SETUP----
+wn = trtl.Screen()
+
+#----IMAGE SETUP-----
+envelope_closed = 'closedenveloperesize.gif'
+wn.addshape(envelope_closed)
+
+envelope_opened = 'openenveloperesize.gif'
+wn.addshape(envelope_opened)
+
+
+
+#-----TURTLES-----
+envelope = trtl.Turtle(shape=envelope_closed)
+
+
+
+
+
+
 
 # TODO 2: Change the image of the envelope to an opened picture when clicked on
 
-# TODO 3: Store all the puzzle pieces in a list
+# TODO 3: Import the puzzle pieces images, creating different turtles for each
+# TODO 3.1: Store all the puzzle pieces in a list
 
 # TODO 4: Have the puzzle pieces come out of the envelope and go to different places (function)
 
@@ -13,3 +36,15 @@
 # TODO 7: Option to restart the puzzle?
 
 # TODO 8: Make everything clearly able to be read/seen by an elderly person
+
+
+
+
+
+
+
+
+
+
+
+wn.mainloop()
