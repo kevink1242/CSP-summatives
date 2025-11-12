@@ -13,7 +13,23 @@ wn.addshape(envelope_closed)
 envelope_opened = 'openenveloperesize.gif'
 wn.addshape(envelope_opened)
 
+piece1 = '1.gif'
+wn.addshape(piece1)
 
+piece2 = '2.gif'
+wn.addshape(piece2)
+
+piece3 = '3.gif'
+wn.addshape(piece3)
+
+piece4 = '4.gif'
+wn.addshape(piece4)
+
+piece5 = '5.gif'
+wn.addshape(piece5)
+
+piece6 = '6.gif'
+wn.addshape(piece6)
 
 #-----TURTLES-----
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
