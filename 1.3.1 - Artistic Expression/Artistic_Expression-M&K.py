@@ -4,6 +4,8 @@ import turtle as trtl
 #----SCREEN SETUP----
 wn = trtl.Screen()
 
+
+
 #----IMAGE SETUP-----
 envelope_closed = 'closedenveloperesize.gif'
 wn.addshape(envelope_closed)
@@ -14,15 +16,20 @@ wn.addshape(envelope_opened)
 
 
 #-----TURTLES-----
-envelope = trtl.Turtle(shape=envelope_closed)
+envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
+
+
+#-----FUNCTIONS-----
+def open(x,y): # onclick gives 2 parameters but they're not necessary to use
+    envelope.shape(envelope_opened)
 
 
 
+#----EVENTS----
+envelope.onclick(open)
 
 
 
-
-# TODO 2: Change the image of the envelope to an opened picture when clicked on
 
 # TODO 3: Import the puzzle pieces images, creating different turtles for each
 # TODO 3.1: Store all the puzzle pieces in a list
