@@ -1,8 +1,12 @@
 import turtle as trtl
+import random as rand
 
 
 #----SCREEN SETUP----
 wn = trtl.Screen()
+
+wn.setup(width=900, height=800)
+wn.cv._rootwindow.resizable(False, False)
 
 
 
@@ -33,16 +37,65 @@ wn.addshape(piece6)
 
 #-----TURTLES-----
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
+envelope.penup()
+
+
+puzzlepiece1 = trtl.Turtle(shape=piece1)
+puzzlepiece1.penup()
+puzzlepiece1.hideturtle()
+
+puzzlepiece2 = trtl.Turtle(shape=piece2)
+puzzlepiece2.penup()
+puzzlepiece2.hideturtle()
+
+puzzlepiece3 = trtl.Turtle(shape=piece3)
+puzzlepiece3.penup()
+puzzlepiece3.hideturtle()
+
+puzzlepiece4 = trtl.Turtle(shape=piece4)
+puzzlepiece4.penup()
+puzzlepiece4.hideturtle()
+
+puzzlepiece5 = trtl.Turtle(shape=piece5)
+puzzlepiece5.penup()
+puzzlepiece5.hideturtle()
+
+puzzlepiece6 = trtl.Turtle(shape=piece6)
+puzzlepiece6.penup()
+puzzlepiece6.hideturtle()
+
+puzzlepiece_list = [puzzlepiece1,puzzlepiece2,puzzlepiece3,puzzlepiece4,puzzlepiece5,puzzlepiece6]
+
 
 
 #-----FUNCTIONS-----
 def open(x,y): # onclick gives 2 parameters but they're not necessary to use
     envelope.shape(envelope_opened)
 
+    index = 0
+    for i in puzzlepiece_list:
+        randx = rand.randint(-400,400)
+        randy = rand.randint(-400,400)
 
+        puzzlepiece_list[index].showturtle()
+        puzzlepiece_list[index].goto(randx,randy)
+        puzzlepiece_list[index].speed(0)
+
+        index += 1
+    envelope.goto(0,800)
+
+def objectdrag(x,y, piece):
+    piece.goto(x,y)
 
 #----EVENTS----
 envelope.onclick(open)
+
+puzzlepiece1.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece1))
+puzzlepiece2.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece2))
+puzzlepiece3.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece3))
+puzzlepiece4.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece4))
+puzzlepiece5.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece5))
+puzzlepiece6.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece6))
 
 
 
