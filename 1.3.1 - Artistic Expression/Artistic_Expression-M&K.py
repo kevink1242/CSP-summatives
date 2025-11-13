@@ -84,17 +84,17 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
         randy = rand.randint(-400,400)
 
         puzzlepiece_list[index].showturtle()
+        puzzlepiece_list[index].speed(7)
         puzzlepiece_list[index].goto(randx,randy)
         puzzlepiece_list[index].speed(0)
 
         index += 1
     envelope.hideturtle()
 
-def framedrawing():
-    drawer.circle(100,360,4)
-
 def objectdrag(x,y, piece):
     piece.goto(x,y)
+
+
 
 #----PROGRAM----
 envelope.onclick(open)
@@ -108,7 +108,6 @@ puzzlepiece4.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece4))
 puzzlepiece5.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece5))
 puzzlepiece6.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece6))
 
-framedrawing()
 
 
 
