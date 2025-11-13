@@ -35,9 +35,11 @@ wn.addshape(piece5)
 piece6 = '6.gif'
 wn.addshape(piece6)
 
-#-----TURTLES-----
-fontsetup = ('Arial',)
+#----VARIABLES---
+xcord = 211
+ycord = -59
 
+#-----TURTLES-----
 drawer = trtl.Turtle()
 drawer.penup()
 drawer.hideturtle()
@@ -72,6 +74,8 @@ puzzlepiece6.hideturtle()
 
 puzzlepiece_list = [puzzlepiece1,puzzlepiece2,puzzlepiece3,puzzlepiece4,puzzlepiece5,puzzlepiece6]
 
+cordslist = [(211,-59)]
+
 
 
 #-----FUNCTIONS-----
@@ -91,10 +95,24 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
         index += 1
     envelope.hideturtle()
 
+
+
 def objectdrag(x,y, piece):
+    selectedpiece = puzzlepiece_list.index(piece)
+    print(selectedpiece)
     piece.goto(x,y)
+    
 
+    #print(piece,' is at',x,',',y)
 
+    print(cordslist[selectedpiece][0])
+    if ((piece.xcor()-5) < cordslist[selectedpiece][0]) and ((piece.xcor()+5) > cordslist[selectedpiece][0]):
+        if ((piece.ycor()-5) < cordslist[selectedpiece][1]) and ((piece.ycor()+5) > cordslist[selectedpiece][1]):
+            print('done')
+            piece.ondrag(None)
+    else:
+        print('not')
+    print('adfnsv')
 
 #----PROGRAM----
 envelope.onclick(open)
