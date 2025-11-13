@@ -36,6 +36,12 @@ piece6 = '6.gif'
 wn.addshape(piece6)
 
 #-----TURTLES-----
+fontsetup = ('Arial',)
+
+drawer = trtl.Turtle()
+drawer.penup()
+drawer.hideturtle()
+
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
 envelope.penup()
 
@@ -82,14 +88,19 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
         puzzlepiece_list[index].speed(0)
 
         index += 1
-    envelope.goto(0,800)
+    envelope.hideturtle()
+
+def framedrawing():
+    drawer.circle(100,360,4)
 
 def objectdrag(x,y, piece):
     piece.goto(x,y)
 
-#----EVENTS----
+#----PROGRAM----
 envelope.onclick(open)
 
+
+# lambda creates a third 'anonymous' variable that allows for the ondrag() function to give 3 parameters instead of 2
 puzzlepiece1.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece1))
 puzzlepiece2.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece2))
 puzzlepiece3.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece3))
@@ -97,15 +108,9 @@ puzzlepiece4.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece4))
 puzzlepiece5.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece5))
 puzzlepiece6.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece6))
 
+framedrawing()
 
 
-
-# TODO 3: Import the puzzle pieces images, creating different turtles for each
-# TODO 3.1: Store all the puzzle pieces in a list
-
-# TODO 4: Have the puzzle pieces come out of the envelope and go to different places (function)
-
-# TODO 5: Make each puzzle piece able to be dragged
 
 # TODO 6: Conditional statement if the puzzle piece comes close enough to a (x,y) coordinate and disabling the drag function
 
