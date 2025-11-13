@@ -35,18 +35,18 @@ wn.addshape(piece5)
 piece6 = '6.gif'
 wn.addshape(piece6)
 
-#----VARIABLES---
-xcord = 211
-ycord = -59
 
 #-----TURTLES-----
 drawer = trtl.Turtle()
+drawer.pensize(10)
+drawer.pencolor('brown')
+drawer.fillcolor('gray')
+drawer.speed(0)
 drawer.penup()
 drawer.hideturtle()
 
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
 envelope.penup()
-
 
 puzzlepiece1 = trtl.Turtle(shape=piece1)
 puzzlepiece1.penup()
@@ -72,10 +72,13 @@ puzzlepiece6 = trtl.Turtle(shape=piece6)
 puzzlepiece6.penup()
 puzzlepiece6.hideturtle()
 
+
+#---LISTS---
 puzzlepiece_list = [puzzlepiece1,puzzlepiece2,puzzlepiece3,puzzlepiece4,puzzlepiece5,puzzlepiece6]
 
-cordslist = [(211,-59)]
+cords_list = [(211,-59)]
 
+# coordinates match the puzzle piece in the same index
 
 
 #-----FUNCTIONS-----
@@ -94,20 +97,32 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
 
         index += 1
     envelope.hideturtle()
+    framedrawing()
 
+def framedrawing():
+    drawer.goto(-230,150)
+    drawer.pendown()
+    drawer.begin_fill()
+    drawer.forward(440)
+    drawer.setheading(270)
+    drawer.forward(295)
+    drawer.setheading(180)
+    drawer.forward(440)
+    drawer.setheading(90)
+    drawer.forward(295)
+    drawer.end_fill()
 
 
 def objectdrag(x,y, piece):
     selectedpiece = puzzlepiece_list.index(piece)
-    print(selectedpiece)
     piece.goto(x,y)
     
 
     #print(piece,' is at',x,',',y)
 
-    print(cordslist[selectedpiece][0])
-    if ((piece.xcor()-5) < cordslist[selectedpiece][0]) and ((piece.xcor()+5) > cordslist[selectedpiece][0]):
-        if ((piece.ycor()-5) < cordslist[selectedpiece][1]) and ((piece.ycor()+5) > cordslist[selectedpiece][1]):
+    print(cords_list[selectedpiece][0])
+    if ((piece.xcor()-5) < cords_list[selectedpiece][0]) and ((piece.xcor()+5) > cords_list[selectedpiece][0]):
+        if ((piece.ycor()-5) < cords_list[selectedpiece][1]) and ((piece.ycor()+5) > cords_list[selectedpiece][1]):
             print('done')
             piece.ondrag(None)
     else:
