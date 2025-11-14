@@ -44,6 +44,10 @@ drawer.speed(0)
 drawer.penup()
 drawer.hideturtle()
 
+writer = trtl.Turtle()
+writer.hideturtle()
+writer.penup()
+
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
 envelope.penup()
 
@@ -87,9 +91,15 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
 
     index = 0
     for i in puzzlepiece_list:
+        randx = rand.randint(-350,350)
+        randy = rand.randint(-350,350)
 
-        randx = rand.randint(-400,400)
-        randy = rand.randint(-400,400)
+        # if the number is in a certain range, it continously selects a number until it's desirable, we don't want it near the middle as that breaks the program
+        while randx < 282 and randx > -210:
+            randx = rand.randint(-400,400)
+
+        while randy < 229 and randy > -232:
+            randy = rand.randint(-400,400)
 
         puzzlepiece_list[index].showturtle()
         puzzlepiece_list[index].speed(7)
@@ -158,6 +168,8 @@ puzzlepiece6.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece6))
 
 
 
+# max height = 229 & -232
+# max width = 282 & -210 
 
 # TODO 7: Option to restart the puzzle?
 
