@@ -121,8 +121,15 @@ def objectdrag(x,y, piece):
     if ((piece.xcor()-20) < cords_list[selectedpiece][0]) and ((piece.xcor()+20) > cords_list[selectedpiece][0]):
         if ((piece.ycor()-20) < cords_list[selectedpiece][1]) and ((piece.ycor()+20) > cords_list[selectedpiece][1]):
             print('done')
-            piece.ondrag(None)
-            piece.goto(cords_list[selectedpiece])
+            if selectedpiece == 0:
+                puzzlepiece1.goto(cords_list[0])
+                puzzlepiece1.ondrag(None)
+            elif selectedpiece == 1:
+                puzzlepiece2.goto(cords_list[1])
+            elif selectedpiece == 2:
+                puzzlepiece3.goto(cords_list[2])
+            elif selectedpiece == 3:
+                puzzlepiece4.goto(cords_list[3])
     else:
         print('not')
 
