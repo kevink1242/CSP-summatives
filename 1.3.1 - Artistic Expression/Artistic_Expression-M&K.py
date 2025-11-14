@@ -9,6 +9,8 @@ wn.setup(width=900, height=800)
 wn.cv._rootwindow.resizable(False, False)
 
 
+#---VARIABLES---
+
 
 #----IMAGE SETUP-----
 envelope_closed = 'closedenveloperesize.gif'
@@ -47,6 +49,7 @@ drawer.hideturtle()
 writer = trtl.Turtle()
 writer.hideturtle()
 writer.penup()
+writer.color('brown')
 
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
 envelope.penup()
@@ -87,6 +90,7 @@ cords_list = [(-150,69),(-2,53),(142,52),(-150,-56),(1,-78),(140,-75)]
 
 #-----FUNCTIONS-----
 def open(x,y): # onclick gives 2 parameters but they're not necessary to use
+    writer.clear()
     envelope.shape(envelope_opened)
 
     index = 0
@@ -121,6 +125,11 @@ def framedrawing():
     drawer.setheading(90)
     drawer.forward(295)
 
+    writer.goto(0,200)
+    writer.write('Using the mouse, hold left click',align='center',font=('Times New Roman',35,'normal'))
+    writer.goto(0,170)
+    writer.write('and drag the puzzle pieces',align='center',font=('Times New Roman',35,'normal'))
+
 def objectdrag(x,y, piece):
     selectedpiece = puzzlepiece_list.index(piece) # Acts as the index for the different tuples themselves inside of cords_list
     piece.goto(x,y)
@@ -154,6 +163,12 @@ def objectdrag(x,y, piece):
         print('not')
 
 #----PROGRAM----
+writer.goto(0,-250)
+writer.write('You have mail!', align='center', font=('Times New Roman',65,'normal'))
+
+writer.color('green')
+writer.goto(0,150)
+writer.write('Using the mouse, left click the envelope',align='center',font=('Times New Roman',50,'normal'))
 envelope.onclick(open)
 
 
