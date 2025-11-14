@@ -10,7 +10,7 @@ wn.cv._rootwindow.resizable(False, False)
 
 
 #---VARIABLES---
-
+piececomplete = 0
 
 #----IMAGE SETUP-----
 envelope_closed = 'closedenveloperesize.gif'
@@ -131,6 +131,8 @@ def framedrawing():
     writer.write('and drag the puzzle pieces',align='center',font=('Times New Roman',35,'normal'))
 
 def objectdrag(x,y, piece):
+    global piececomplete
+
     selectedpiece = puzzlepiece_list.index(piece) # Acts as the index for the different tuples themselves inside of cords_list
     piece.goto(x,y)
     
@@ -142,25 +144,36 @@ def objectdrag(x,y, piece):
         if ((piece.ycor()-25) < cords_list[selectedpiece][1]) and ((piece.ycor()+25) > cords_list[selectedpiece][1]):
             print('done')
             if selectedpiece == 0:
+                piececomplete += 1
                 puzzlepiece1.goto(cords_list[0])
                 puzzlepiece1.ondrag(None)
             elif selectedpiece == 1:
+                piececomplete += 1
                 puzzlepiece2.goto(cords_list[1])
                 puzzlepiece2.ondrag(None)
             elif selectedpiece == 2:
+                piececomplete += 1
                 puzzlepiece3.goto(cords_list[2])
                 puzzlepiece3.ondrag(None)
             elif selectedpiece == 3:
+                piececomplete += 1
                 puzzlepiece4.goto(cords_list[3])
                 puzzlepiece4.ondrag(None)
             elif selectedpiece == 4:
+                piececomplete += 1
                 puzzlepiece5.goto(cords_list[4])
                 puzzlepiece5.ondrag(None)
             elif selectedpiece == 5:
+                piececomplete += 1
                 puzzlepiece6.goto(cords_list[5])
                 puzzlepiece6.ondrag(None)
-    else:
-        print('not')
+    completepuzzle(piececomplete)
+
+def completepuzzle(num):
+    if num == 6:
+        writer.clear()
+        writer.write('You did it!', align='center',font=('Times New Roman',50,'normal'))
+
 
 #----PROGRAM----
 writer.goto(0,-250)
