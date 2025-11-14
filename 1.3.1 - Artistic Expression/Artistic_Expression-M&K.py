@@ -75,7 +75,7 @@ puzzlepiece6.hideturtle()
 #---LISTS---
 puzzlepiece_list = [puzzlepiece1,puzzlepiece2,puzzlepiece3,puzzlepiece4,puzzlepiece5,puzzlepiece6]
 
-cords_list = [(-150,69)]
+cords_list = [(-150,69),(-2,53),(142,52),(-150,-56),(1,-78),(140,-75)]
 
 # coordinates match the puzzle piece in the same index
 # Each set of coordinates is a "tuple"
@@ -118,11 +118,11 @@ def objectdrag(x,y, piece):
     print('is at',x,',',y)
 
     # the number inside of the second bracket is the index for the inside of the tuple
-    if ((piece.xcor()-15) < cords_list[selectedpiece][0]) and ((piece.xcor()+15) > cords_list[selectedpiece][0]):
-        if ((piece.ycor()-15) < cords_list[selectedpiece][1]) and ((piece.ycor()+15) > cords_list[selectedpiece][1]):
+    if ((piece.xcor()-20) < cords_list[selectedpiece][0]) and ((piece.xcor()+20) > cords_list[selectedpiece][0]):
+        if ((piece.ycor()-20) < cords_list[selectedpiece][1]) and ((piece.ycor()+20) > cords_list[selectedpiece][1]):
             print('done')
             piece.ondrag(None)
-            puzzlepiece1.goto(cords_list[0])
+            piece.goto(cords_list[selectedpiece])
     else:
         print('not')
 
