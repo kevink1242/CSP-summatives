@@ -39,8 +39,7 @@ wn.addshape(piece6)
 #-----TURTLES-----
 drawer = trtl.Turtle()
 drawer.pensize(10)
-drawer.pencolor('brown')
-drawer.fillcolor('gray')
+drawer.pencolor('lightsalmon4')
 drawer.speed(0)
 drawer.penup()
 drawer.hideturtle()
@@ -76,9 +75,10 @@ puzzlepiece6.hideturtle()
 #---LISTS---
 puzzlepiece_list = [puzzlepiece1,puzzlepiece2,puzzlepiece3,puzzlepiece4,puzzlepiece5,puzzlepiece6]
 
-cords_list = [(211,-59)]
+cords_list = [(-150,69)]
 
 # coordinates match the puzzle piece in the same index
+# Each set of coordinates is a "tuple"
 
 
 #-----FUNCTIONS-----
@@ -102,7 +102,6 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
 def framedrawing():
     drawer.goto(-230,150)
     drawer.pendown()
-    drawer.begin_fill()
     drawer.forward(440)
     drawer.setheading(270)
     drawer.forward(295)
@@ -110,24 +109,22 @@ def framedrawing():
     drawer.forward(440)
     drawer.setheading(90)
     drawer.forward(295)
-    drawer.end_fill()
-
 
 def objectdrag(x,y, piece):
-    selectedpiece = puzzlepiece_list.index(piece)
+    selectedpiece = puzzlepiece_list.index(piece) # Acts as the index for the different tuples themselves inside of cords_list
     piece.goto(x,y)
     
 
-    #print(piece,' is at',x,',',y)
+    print('is at',x,',',y)
 
-    print(cords_list[selectedpiece][0])
-    if ((piece.xcor()-5) < cords_list[selectedpiece][0]) and ((piece.xcor()+5) > cords_list[selectedpiece][0]):
-        if ((piece.ycor()-5) < cords_list[selectedpiece][1]) and ((piece.ycor()+5) > cords_list[selectedpiece][1]):
+    # the number inside of the second bracket is the index for the inside of the tuple
+    if ((piece.xcor()-15) < cords_list[selectedpiece][0]) and ((piece.xcor()+15) > cords_list[selectedpiece][0]):
+        if ((piece.ycor()-15) < cords_list[selectedpiece][1]) and ((piece.ycor()+15) > cords_list[selectedpiece][1]):
             print('done')
             piece.ondrag(None)
+            puzzlepiece1.goto(cords_list[0])
     else:
         print('not')
-    print('adfnsv')
 
 #----PROGRAM----
 envelope.onclick(open)
