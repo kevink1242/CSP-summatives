@@ -87,6 +87,7 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
 
     index = 0
     for i in puzzlepiece_list:
+
         randx = rand.randint(-400,400)
         randy = rand.randint(-400,400)
 
@@ -118,18 +119,27 @@ def objectdrag(x,y, piece):
     print('is at',x,',',y)
 
     # the number inside of the second bracket is the index for the inside of the tuple
-    if ((piece.xcor()-20) < cords_list[selectedpiece][0]) and ((piece.xcor()+20) > cords_list[selectedpiece][0]):
-        if ((piece.ycor()-20) < cords_list[selectedpiece][1]) and ((piece.ycor()+20) > cords_list[selectedpiece][1]):
+    if ((piece.xcor()-25) < cords_list[selectedpiece][0]) and ((piece.xcor()+25) > cords_list[selectedpiece][0]):
+        if ((piece.ycor()-25) < cords_list[selectedpiece][1]) and ((piece.ycor()+25) > cords_list[selectedpiece][1]):
             print('done')
             if selectedpiece == 0:
                 puzzlepiece1.goto(cords_list[0])
                 puzzlepiece1.ondrag(None)
             elif selectedpiece == 1:
                 puzzlepiece2.goto(cords_list[1])
+                puzzlepiece2.ondrag(None)
             elif selectedpiece == 2:
                 puzzlepiece3.goto(cords_list[2])
+                puzzlepiece3.ondrag(None)
             elif selectedpiece == 3:
                 puzzlepiece4.goto(cords_list[3])
+                puzzlepiece4.ondrag(None)
+            elif selectedpiece == 4:
+                puzzlepiece5.goto(cords_list[4])
+                puzzlepiece5.ondrag(None)
+            elif selectedpiece == 5:
+                puzzlepiece6.goto(cords_list[5])
+                puzzlepiece6.ondrag(None)
     else:
         print('not')
 
@@ -148,7 +158,6 @@ puzzlepiece6.ondrag(lambda x,y: objectdrag(x,y,puzzlepiece6))
 
 
 
-# TODO 6: Conditional statement if the puzzle piece comes close enough to a (x,y) coordinate and disabling the drag function
 
 # TODO 7: Option to restart the puzzle?
 
