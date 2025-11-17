@@ -146,25 +146,8 @@ def objectdrag(x,y, piece):
     # the number inside of the second bracket is the index for the inside of the tuple
     if ((piece.xcor()-25) < cords_list[selectedpiece][0]) and ((piece.xcor()+25) > cords_list[selectedpiece][0]):
         if ((piece.ycor()-25) < cords_list[selectedpiece][1]) and ((piece.ycor()+25) > cords_list[selectedpiece][1]):
-            if selectedpiece == 0:
-                puzzlepiece1.goto(cords_list[0])
-                puzzlepiece1.ondrag(None)
-            elif selectedpiece == 1:
-                puzzlepiece2.goto(cords_list[1])
-                puzzlepiece2.ondrag(None)
-            elif selectedpiece == 2:
-                puzzlepiece3.goto(cords_list[2])
-                puzzlepiece3.ondrag(None)
-            elif selectedpiece == 3:
-                puzzlepiece4.goto(cords_list[3])
-                puzzlepiece4.ondrag(None)
-            elif selectedpiece == 4:
-                puzzlepiece5.goto(cords_list[4])
-                puzzlepiece5.ondrag(None)
-            elif selectedpiece == 5:
-                puzzlepiece6.goto(cords_list[5])
-                puzzlepiece6.ondrag(None)
-
+            piece.goto(cords_list[selectedpiece])
+            piece.ondrag(None)
 
 
 #----PROGRAM----
