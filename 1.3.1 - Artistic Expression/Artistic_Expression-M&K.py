@@ -87,6 +87,7 @@ cords_list = [(-150,69),(-2,53),(142,52),(-150,-56),(1,-78),(140,-75)]
 
 #-----FUNCTIONS-----
 def open(x,y): # onclick gives 2 parameters but they're not necessary to use
+    envelope.onclick(None)
     writer.clear()
     envelope.shape(envelope_opened)
 
