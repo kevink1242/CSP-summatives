@@ -9,8 +9,6 @@ wn.setup(width=900, height=800)
 wn.cv._rootwindow.resizable(False, False)
 
 
-#---VARIABLES---
-piececomplete = 0
 
 #----IMAGE SETUP-----
 envelope_closed = 'closedenveloperesize.gif'
@@ -49,7 +47,6 @@ drawer.hideturtle()
 writer = trtl.Turtle()
 writer.hideturtle()
 writer.penup()
-writer.color('brown')
 
 envelope = trtl.Turtle(shape=envelope_closed) # Envelope picture at the beginning. originally set to closed (shape=)
 envelope.penup()
@@ -95,15 +92,22 @@ def open(x,y): # onclick gives 2 parameters but they're not necessary to use
 
     index = 0
     for i in puzzlepiece_list:
-        randx = rand.randint(-350,350)
-        randy = rand.randint(-350,350)
+        randx = rand.randint(-400,350)
+        randy = rand.randint(-400,350)
 
         # if the number is in a certain range, it continously selects a number until it's desirable, we don't want it near the middle as that breaks the program
-        while randx < 282 and randx > -210:
-            randx = rand.randint(-400,400)
 
-        while randy < 229 and randy > -232:
-            randy = rand.randint(-400,400)
+        if randx < 282 and randx > -210:
+            if randy < 229 and randy > -232:
+                while randy < 229 and randy > -232:
+                    randy = rand.randint(-400,350)
+
+        if randy < 229 and randy > -232:
+            if randx < 282 and randx > -210:
+                while randx < 282 and randx > -210:
+                    randx = rand.randint(-400,350)
+
+        
 
         puzzlepiece_list[index].showturtle()
         puzzlepiece_list[index].speed(7)
@@ -125,14 +129,14 @@ def framedrawing():
     drawer.setheading(90)
     drawer.forward(295)
 
+    writer.color('green')
     writer.goto(0,200)
     writer.write('Using the mouse, hold left click',align='center',font=('Times New Roman',35,'normal'))
-    writer.goto(0,170)
+    writer.goto(0,160)
     writer.write('and drag the puzzle pieces',align='center',font=('Times New Roman',35,'normal'))
 
-def objectdrag(x,y, piece):
-    global piececomplete
 
+def objectdrag(x,y, piece):
     selectedpiece = puzzlepiece_list.index(piece) # Acts as the index for the different tuples themselves inside of cords_list
     piece.goto(x,y)
     
@@ -142,46 +146,36 @@ def objectdrag(x,y, piece):
     # the number inside of the second bracket is the index for the inside of the tuple
     if ((piece.xcor()-25) < cords_list[selectedpiece][0]) and ((piece.xcor()+25) > cords_list[selectedpiece][0]):
         if ((piece.ycor()-25) < cords_list[selectedpiece][1]) and ((piece.ycor()+25) > cords_list[selectedpiece][1]):
-            print('done')
             if selectedpiece == 0:
-                piececomplete += 1
                 puzzlepiece1.goto(cords_list[0])
                 puzzlepiece1.ondrag(None)
             elif selectedpiece == 1:
-                piececomplete += 1
                 puzzlepiece2.goto(cords_list[1])
                 puzzlepiece2.ondrag(None)
             elif selectedpiece == 2:
-                piececomplete += 1
                 puzzlepiece3.goto(cords_list[2])
                 puzzlepiece3.ondrag(None)
             elif selectedpiece == 3:
-                piececomplete += 1
                 puzzlepiece4.goto(cords_list[3])
                 puzzlepiece4.ondrag(None)
             elif selectedpiece == 4:
-                piececomplete += 1
                 puzzlepiece5.goto(cords_list[4])
                 puzzlepiece5.ondrag(None)
             elif selectedpiece == 5:
-                piececomplete += 1
                 puzzlepiece6.goto(cords_list[5])
                 puzzlepiece6.ondrag(None)
-    completepuzzle(piececomplete)
 
-def completepuzzle(num):
-    if num == 6:
-        writer.clear()
-        writer.write('You did it!', align='center',font=('Times New Roman',50,'normal'))
 
 
 #----PROGRAM----
 writer.goto(0,-250)
+writer.color('green')
+writer.write('Using the mouse, left click the envelope',align='center',font=('Times New Roman',50,'normal'))
+
+writer.color('brown')
+writer.goto(0,150)
 writer.write('You have mail!', align='center', font=('Times New Roman',65,'normal'))
 
-writer.color('green')
-writer.goto(0,150)
-writer.write('Using the mouse, left click the envelope',align='center',font=('Times New Roman',50,'normal'))
 envelope.onclick(open)
 
 
